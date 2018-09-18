@@ -12,4 +12,11 @@ export class UtilizadorCadastroComponent implements OnInit {
   ngOnInit() {
   }
 
+  value = true;
+
+  types = [
+    { label: 'Paypal', value: 'PayPal' },
+    { label: 'Visa', value: 'Visa' }
+  ];
+
 }

@@ -1,3 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+label {
+    color: #4d4d4d;
+}
+
+h1 {
+    color: #4d4d4d;
+}
+
+hr {
+    padding: 0px;
+    margin: 0px;
+}
+
+.divisor{
+    margin-top: 20px;
+}
+
+.divisor label {
+    color: #4d4d4d;  
+}
+
+.label-form {
+  color: #1EAFA6;  
+}
+
+.divisor hr {
+    background-color: #4d4d4d;
+}
+
+.formulario {
+    margin-top: 30px;
+}
+
+#base {
+    background-color: white;
+}
+
+.ui-fluid p-autocomplete, .ui-fluid .ui-autocomplete, .ui-fluid .ui-autocomplete-input {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom-color: rgba(12, 12, 12, 0.12);
+}
+
+.ui-autocomplete .ui-autocomplete-input {
+    border-bottom: 1px solid rgba(12, 12, 12, 0.12);
+}
+
+.ui-autocomplete .ui-autocomplete-input span input {
+    border-bottom: none;
+}
+
+.ui-autocomplete .ui-autocomplete-input:focus {
+    border-bottom: 1px solid #1EAFA6;
+}
+

@@ -1,15 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { MenubarComponent } from './menubar/menubar.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { UtilizadorCadastroComponent } from './utilizador/utilizador-cadastro/utilizador-cadastro.component';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {CheckboxModule} from 'primeng/checkbox';
 
-import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -24,8 +26,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     FormsModule,
     BrowserAnimationsModule,
 
-    MatFormFieldModule
-
+    AutoCompleteModule,
+    InputTextareaModule,
+    CheckboxModule
+    
+    
 
   ],
   providers: [],
