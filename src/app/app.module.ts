@@ -8,9 +8,10 @@ import { MenubarComponent } from './menubar/menubar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UtilizadorCadastroComponent } from './utilizador/utilizador-cadastro/utilizador-cadastro.component';
 
-import {AutoCompleteModule} from 'primeng/autocomplete';
-import {InputTextareaModule} from 'primeng/inputtextarea';
-import {CheckboxModule} from 'primeng/checkbox';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CheckboxModule } from 'primeng/checkbox';
+import {ButtonModule} from 'primeng/button';
 
 
 
@@ -28,9 +29,10 @@ import {CheckboxModule} from 'primeng/checkbox';
 
     AutoCompleteModule,
     InputTextareaModule,
-    CheckboxModule
-    
-    
+    CheckboxModule,
+    ButtonModule
+
+
 
   ],
   providers: [],

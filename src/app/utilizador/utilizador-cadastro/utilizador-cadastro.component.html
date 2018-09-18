@@ -4,92 +4,98 @@
     <h1>Novo Utilizador</h1>
   </div>
 
-  <!-- <form class="form-horizontal" role="form"> -->
+  <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
 
-  <div class="divisor">
-    <label>Preencha as informações</label>
-    <hr>
-  </div>
-
-  <div class="ui-g formulario">
-
-    <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
-      <label class="label-form">Nome</label>
-      <input pInputText type="text" required class="form-control">
+    <div class="divisor">
+      <label>Preencha as informações</label>
+      <hr>
     </div>
 
-    <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
-      <label class="label-form">CPF/CNPJ</label>
-      <input pInputText type="text" required class="form-control">
-    </div>
+    <div class="ui-g formulario">
 
-    <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
-      <label class="label-form">Inscr. Estadual</label>
-      <input pInputText type="text" class="form-control">
-    </div>
+      <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+        <label class="label-form">Nome</label>
 
-    <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
-      <label class="label-form">Inscr. Municipal</label>
-      <input pInputText type="text" class="form-control">
-    </div>
+        <input pInputText type="text" name="nome" [(ngModel)]="utilizador.nome" #nome="ngModel" required minlength="5"
+          class="form-control">
 
-    <div class="ui-g-6 ui-md-3 ui-lg-1 ui-fluid">
-      <label class="label-form">Qtd. Filiais</label>
-      <input pInputText type="number" class="form-control">
-    </div>
 
-    <div class="ui-g-6 ui-md-3 ui-lg-1 ui-fluid">
-      <label class="label-form">Nº de Acessos</label>
-      <input pInputText type="number" class="form-control">
-    </div>
 
-    <div class="ui-g-6 ui-md-3 ui-lg-1 ui-fluid">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">CPF/CNPJ</label>
+        <input pInputText type="text" required class="form-control">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">Inscr. Estadual</label>
+        <input pInputText type="text" class="form-control">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">Inscr. Municipal</label>
+        <input pInputText type="text" class="form-control">
+      </div>
+
+      <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
+        <label class="label-form">Qtd. Filiais</label>
+        <input pInputText type="number" class="form-control">
+      </div>
+
+      <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
+        <label class="label-form">Nº de Acessos</label>
+        <input pInputText type="number" class="form-control">
+      </div>
+
+      <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
         <label class="label-form">Situação</label>
+        <div class="ui-g-12">
+          <p-checkbox label="Ativo" binary=true></p-checkbox>
+        </div>
+      </div>
+
       <div class="ui-g-12">
-        <p-checkbox name="group1" value="New York" label="New York" inputId="ny"></p-checkbox>
+        <div class="divisor">
+          <label>Informações de endereço</label>
+          <hr>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label class="label-form">Logradouro</label>
+        <input pInputText type="text" required class="form-control">
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label class="label-form">Bairro</label>
+        <input pInputText type="text" class="form-control">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label class="label-form">CEP</label>
+        <input pInputText type="text" class="form-control">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label class="label-form">Número</label>
+        <input pInputText type="text" class="form-control">
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label class="label-form">Cidade</label>
+        <p-autoComplete class="form-control" field="name" [minLength]="1"></p-autoComplete>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label class="label-form">Observações</label>
+        <textarea [rows]="2" class="form-control" pInputTextarea></textarea>
       </div>
     </div>
-
-    <div class="ui-g-12">
-      <div class="divisor">
-        <label>Informações de endereço</label>
-        <hr>
-      </div>
+    <div class="ui-g btn-container">
+      <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
+      <a pButton label="Pesquisa" class="btn btn-warning"></a>
     </div>
 
-    <div class="ui-g-12 ui-md-6 ui-fluid">
-      <label class="label-form">Logradouro</label>
-      <input pInputText type="text" required class="form-control">
-    </div>
-
-    <div class="ui-g-12 ui-md-6 ui-fluid">
-      <label class="label-form">Bairro</label>
-      <input pInputText type="text" class="form-control">
-    </div>
-
-    <div class="ui-g-12 ui-md-3 ui-fluid">
-      <label class="label-form">CEP</label>
-      <input pInputText type="text" class="form-control">
-    </div>
-
-    <div class="ui-g-12 ui-md-3 ui-fluid">
-      <label class="label-form">Número</label>
-      <input pInputText type="text" class="form-control">
-    </div>
-
-    <div class="ui-g-12 ui-md-6 ui-fluid">
-      <label class="label-form">Cidade</label>
-      <p-autoComplete class="form-control" field="name" [minLength]="1"></p-autoComplete>
-    </div>
-
-    <div class="ui-g-12 ui-fluid">
-      <label class="label-form">Observações</label>
-      <textarea [rows]="2" class="form-control" pInputTextarea></textarea>
-    </div>
-
-  </div>
-
-
-
-  <!-- </form> -->
+  </form>
 </div>

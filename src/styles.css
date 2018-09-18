@@ -1,12 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+    --cor-secundaria: #1EAFA6;
+    --cor-primaria-texto: #4d4d4d;
+}
+
 
 label {
-    color: #4d4d4d;
+    color: var(--cor-primaria-texto);
 }
 
 h1 {
-    color: #4d4d4d;
+    color: var(--cor-primaria-texto);
 }
 
 hr {
@@ -14,29 +19,45 @@ hr {
     margin: 0px;
 }
 
+textarea {
+    resize: none;
+}
+
 .divisor{
     margin-top: 20px;
 }
 
 .divisor label {
-    color: #4d4d4d;  
+    color: var(--cor-primaria-texto);
 }
 
 .label-form {
-  color: #1EAFA6;  
+  color: var(--cor-secundaria);
 }
 
 .divisor hr {
-    background-color: #4d4d4d;
+    background-color: var(--cor-primaria-texto);
 }
 
 .formulario {
     margin-top: 30px;
 }
 
+.btn-container {
+    margin: 5px;
+    padding: 10px;
+}
+
+
 #base {
     background-color: white;
 }
+
+body .ui-state-disabled, body .ui-widget:disabled {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
 
 .ui-fluid p-autocomplete, .ui-fluid .ui-autocomplete, .ui-fluid .ui-autocomplete-input {
     border-left: none;
@@ -54,6 +75,59 @@ hr {
 }
 
 .ui-autocomplete .ui-autocomplete-input:focus {
-    border-bottom: 1px solid #1EAFA6;
+    border-bottom: 1px solid var(--cor-secundaria);
 }
 
+/* INICIO - CHECKBOX  */
+body .ui-chkbox .ui-chkbox-box .ui-chkbox-icon {
+    overflow: hidden;
+    position: relative;
+    font-size: 18px;
+}
+.ui-chkbox .ui-chkbox-icon {
+    display: block;
+}
+body .ui-chkbox .ui-chkbox-box.ui-state-active {
+    border-color: var(--cor-secundaria);
+    background-color: var(--cor-secundaria);
+    color: #ffffff;
+}
+body .ui-chkbox .ui-chkbox-box {
+    border: 1px solid #a6a6a6;
+    background-color: #ffffff;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-transition: background-color 0.2s, border-color 0.2s;
+    -o-transition: background-color 0.2s, border-color 0.2s;
+    -webkit-transition: background-color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+.ui-chkbox .ui-chkbox-box {
+    width: 1.125em;
+    height: 1.125em;
+    line-height: 1.125em;
+    border-radius: 2px;
+    text-align: center;
+}
+body .ui-chkbox-label {
+    margin: 0 0 0 0.5em;
+}
+.ui-chkbox-label {
+    vertical-align: middle;
+}
+/* FINAL - CHECKBOX */
+
+/* INICIO - BUTTON */
+
+
+.ui-button {
+    padding: 4.5px 14px;
+    margin: 5px;
+    margin-left: 0px;
+}
+
+/* FINAL - BUTTON */

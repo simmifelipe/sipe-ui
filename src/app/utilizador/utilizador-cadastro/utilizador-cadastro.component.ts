@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-utilizador-cadastro',
@@ -7,16 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UtilizadorCadastroComponent implements OnInit {
 
+  utilizador: Utilizador = new Utilizador();
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  value = true;
 
-  types = [
-    { label: 'Paypal', value: 'PayPal' },
-    { label: 'Visa', value: 'Visa' }
-  ];
+  salvar(form: FormControl) {
+    console.log(form);
+  }
+
+}
+
+export class Utilizador {
+
+  nome: string;
 
 }
