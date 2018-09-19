@@ -18,40 +18,44 @@
 
         <input pInputText type="text" name="nome" [(ngModel)]="utilizador.nome" #nome="ngModel" required minlength="5"
           class="form-control">
-
-
+        <app-message [control]="nome" error="required" text="Nome é obrigatório"></app-message>
+        <app-message [control]="nome" error="minlength" text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
 
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
         <label class="label-form">CPF/CNPJ</label>
-        <input pInputText type="text" required class="form-control">
+
+        <input pInputText type="text" required class="form-control" name="cpf_cnpj" [(ngModel)]="utilizador.cpf_cnpj"
+          #cpfCnpj="ngModel">
+        <app-message [control]="cpfCnpj" error="required" text="CPF/CNPJ é obrigatório"></app-message>
+
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
         <label class="label-form">Inscr. Estadual</label>
-        <input pInputText type="text" class="form-control">
+        <input pInputText type="text" class="form-control" name="ie" [(ngModel)]="utilizador.ie">
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
         <label class="label-form">Inscr. Municipal</label>
-        <input pInputText type="text" class="form-control">
+        <input pInputText type="text" class="form-control" name="im" [(ngModel)]="utilizador.im">
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
         <label class="label-form">Qtd. Filiais</label>
-        <input pInputText type="number" class="form-control">
+        <input pInputText type="number" class="form-control" min="0" name="qtd_filiais" [(ngModel)]="utilizador.qtd_filiais">
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
         <label class="label-form">Nº de Acessos</label>
-        <input pInputText type="number" class="form-control">
+        <input pInputText type="number" class="form-control" min="1" name="numero_acessos" [(ngModel)]="utilizador.numero_acessos">
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
         <label class="label-form">Situação</label>
         <div class="ui-g-12">
-          <p-checkbox label="Ativo" binary=true></p-checkbox>
+          <p-checkbox label="Ativo" binary=true name="ativo" [(ngModel)]="utilizador.ativo"></p-checkbox>
         </div>
       </div>
 
@@ -64,22 +68,27 @@
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label class="label-form">Logradouro</label>
-        <input pInputText type="text" required class="form-control">
+
+        <input pInputText type="text" required min="5" class="form-control" name="logradouro" [(ngModel)]="utilizador.endereco.logradouro"
+          #logradouro="ngModel">
+        <app-message [control]="logradouro" error="required" text="Logradouro é obrigatório"></app-message>
+        <app-message [control]="logradouro" error="minlength" text="Mínimo de {{ logradouro.errors?.minlength?.requiredLength }} caracteres"></app-message>
+
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label class="label-form">Bairro</label>
-        <input pInputText type="text" class="form-control">
+        <input pInputText type="text" class="form-control" name="bairro" [(ngModel)]="utilizador.endereco.bairro">
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label class="label-form">CEP</label>
-        <input pInputText type="text" class="form-control">
+        <input pInputText type="text" class="form-control" name="cep" [(ngModel)]="utilizador.endereco.cep">
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label class="label-form">Número</label>
-        <input pInputText type="text" class="form-control">
+        <input pInputText type="text" class="form-control" name="numero" [(ngModel)]="utilizador.endereco.numero">
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
@@ -89,7 +98,7 @@
 
       <div class="ui-g-12 ui-fluid">
         <label class="label-form">Observações</label>
-        <textarea [rows]="2" class="form-control" pInputTextarea></textarea>
+        <textarea [rows]="2" class="form-control" pInputTextarea name="observacoes" [(ngModel)]="utilizador.endereco.observacoes"></textarea>
       </div>
     </div>
     <div class="ui-g btn-container">

@@ -3,6 +3,8 @@
 :root {
     --cor-secundaria: #1EAFA6;
     --cor-primaria-texto: #4d4d4d;
+
+    --cor-mensagem-erro: #f8b7bd;
 }
 
 
@@ -131,3 +133,17 @@ body .ui-chkbox-label {
 }
 
 /* FINAL - BUTTON */
+
+/* INICIO - MESSAGES */
+.ui-message {
+    margin: 0px;
+    margin-top: 3px;
+    border-radius: 3px;  
+}
+
+.ui-messages-error {
+    background-color: var(--cor-mensagem-erro);
+    border: 1px solid var(--cor-mensagem-erro);
+    color: var(--cor-primaria-texto);
+}
+/* FIM - MESSAGES */

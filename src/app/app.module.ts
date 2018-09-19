@@ -1,41 +1,31 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { MenubarComponent } from './menubar/menubar.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { UtilizadorCadastroComponent } from './utilizador/utilizador-cadastro/utilizador-cadastro.component';
-
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { CheckboxModule } from 'primeng/checkbox';
-import {ButtonModule} from 'primeng/button';
-
-
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { UtilizadorModule } from './utilizador/utilizador.module';
+import { UtilizadorService } from './utilizador/utilizador.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    MenubarComponent,
-    UtilizadorCadastroComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     BrowserAnimationsModule,
 
-    AutoCompleteModule,
-    InputTextareaModule,
-    CheckboxModule,
-    ButtonModule
-
-
+    SharedModule,
+    CoreModule,
+    UtilizadorModule
 
   ],
-  providers: [],
+  providers: [UtilizadorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
