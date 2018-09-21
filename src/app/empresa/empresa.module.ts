@@ -21,8 +21,6 @@ import { EmpresaCadastroComponent } from './empresa-cadastro/empresa-cadastro.co
   declarations: [
     EmpresaCadastroComponent
   ],
-  exports: [
-    EmpresaCadastroComponent
-  ]
+  exports: []
 })
 export class EmpresaModule { }

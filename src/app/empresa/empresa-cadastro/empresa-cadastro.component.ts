@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ToastaService } from 'ngx-toasta';
@@ -15,10 +16,12 @@ export class EmpresaCadastroComponent implements OnInit {
 
   constructor(
     private empresaService: EmpresaService,
-    private toastaService: ToastaService
-  ) { }
+    private toastaService: ToastaService,
+    private title: Title 
+    ) { }
 
   ngOnInit() {
+    this.title.setTitle('Sipe - Empresa')
   }
 
   salvar(form: FormControl) {

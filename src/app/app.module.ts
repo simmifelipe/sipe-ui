@@ -1,20 +1,15 @@
-import { EmpresaModule } from './empresa/empresa.module';
-import { EmpresaService } from './empresa/empresa.service';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpModule } from '@angular/http';
-
+import { ToastaModule } from 'ngx-toasta';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { EmpresaModule } from './empresa/empresa.module';
 import { SharedModule } from './shared/shared.module';
 import { UtilizadorModule } from './utilizador/utilizador.module';
-import { UtilizadorService } from './utilizador/utilizador.service';
-import { CidadeService } from './cidade/cidade.service';
-
-import { ToastaModule } from 'ngx-toasta';
-import { EmpresaCadastroComponent } from './empresa/empresa-cadastro/empresa-cadastro.component';
 
 @NgModule({
   declarations: [
@@ -31,14 +26,11 @@ import { EmpresaCadastroComponent } from './empresa/empresa-cadastro/empresa-cad
     SharedModule,
     CoreModule,
     UtilizadorModule,
-    EmpresaModule
+    EmpresaModule,
+    AppRoutingModule
 
   ],
-  providers: [
-    UtilizadorService,
-    CidadeService,
-    EmpresaService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

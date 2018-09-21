@@ -107,6 +107,7 @@
     </div>
     <div class="ui-g btn-container">
       <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
+      <button pButton type="button" label="Novo" class="btn btn-primary" (click)="novo(formulario)"></button>
       <a pButton label="Pesquisa" class="btn btn-warning"></a>
     </div>
 
