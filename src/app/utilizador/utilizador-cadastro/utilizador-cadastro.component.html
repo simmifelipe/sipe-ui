@@ -26,7 +26,7 @@
       <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
         <label class="label-form">CPF/CNPJ</label>
 
-        <input pInputText type="text" required class="form-control" name="cpf_cnpj" [(ngModel)]="utilizador.cpf_cnpj"
+        <input pInputText type="text" required class="form-control" name="cpfCnpj" [(ngModel)]="utilizador.cpfCnpj"
           #cpfCnpj="ngModel">
         <app-message [control]="cpfCnpj" error="required" text="CPF/CNPJ é obrigatório"></app-message>
 
@@ -39,17 +39,17 @@
 
       <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
         <label class="label-form">Inscr. Municipal</label>
-        <input pInputText type="text" class="form-control" name="im" [(ngModel)]="utilizador.im">
+        <input pInputText type="text" class="form-control" name="inscricaoMunicipal" [(ngModel)]="utilizador.inscricaoMunicipal">
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
         <label class="label-form">Qtd. Filiais</label>
-        <input pInputText type="number" class="form-control" min="0" name="qtd_filiais" [(ngModel)]="utilizador.qtd_filiais">
+        <input pInputText type="number" class="form-control" min="0" name="quantidadeFiliais" [(ngModel)]="utilizador.quantidadeFiliais">
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
         <label class="label-form">Nº de Acessos</label>
-        <input pInputText type="number" class="form-control" min="1" name="numero_acessos" [(ngModel)]="utilizador.numero_acessos">
+        <input pInputText type="number" class="form-control" min="1" name="acessosPermitidos" [(ngModel)]="utilizador.acessosPermitidos">
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
@@ -93,7 +93,11 @@
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label class="label-form">Cidade</label>
-        <p-autoComplete class="form-control" field="name" [minLength]="1"></p-autoComplete>
+
+        <p-autoComplete required class="form-control" field="cidade" [minLength]="3" [(ngModel)]="utilizador.cidade" field="nome"
+          [suggestions]="cidadesFiltradas" (completeMethod)="buscarCidades($event)" name="cidade" [forceSelection]="true"
+          #cid="ngModel"></p-autoComplete>
+          <app-message [control]="cid" error="required" text="Cidade é obrigatória"></app-message>
       </div>
 
       <div class="ui-g-12 ui-fluid">

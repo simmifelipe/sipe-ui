@@ -1,0 +1,94 @@
+<div class="section-body contain-lg">
+
+  <div>
+    <h1>Nova Empresa</h1>
+  </div>
+
+  <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
+
+    <div class="divisor">
+      <label>Preencha as informações</label>
+      <hr>
+    </div>
+
+    <div class="ui-g formulario">
+
+      <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+        <label class="label-form">Nome</label>
+
+        <input pInputText type="text" name="nome" [(ngModel)]="empresa.nome" #nome="ngModel" required minlength="3"
+          class="form-control">
+        <app-message [control]="nome" error="required" text="Nome é obrigatório"></app-message>
+        <app-message [control]="nome" error="minlength" text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">CNPJ</label>
+
+        <input pInputText type="text" required class="form-control" name="cnpj" [(ngModel)]="empresa.cnpj" #cnpj="ngModel">
+        <app-message [control]="cnpj" error="required" text="CNPJ é obrigatório"></app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">Inscr. Estadual</label>
+        <input pInputText type="text" class="form-control" name="ie" [(ngModel)]="empresa.ie">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">Inscr. Municipal</label>
+        <input pInputText type="text" class="form-control" name="inscricaoMunicipal" [(ngModel)]="empresa.inscricaoMunicipal">
+      </div>
+
+      <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
+        <label class="label-form">Situação</label>
+        <div class="ui-g-12">
+          <p-checkbox label="Ativo" binary=true name="ativo" [(ngModel)]="empresa.ativo"></p-checkbox>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <div class="divisor">
+          <label>Informações de endereço</label>
+          <hr>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label class="label-form">Logradouro</label>
+
+        <input pInputText type="text" required min="5" class="form-control" name="logradouro" [(ngModel)]="empresa.endereco.logradouro"
+          #logradouro="ngModel">
+        <app-message [control]="logradouro" error="required" text="Logradouro é obrigatório"></app-message>
+        <app-message [control]="logradouro" error="minlength" text="Mínimo de {{ logradouro.errors?.minlength?.requiredLength }} caracteres"></app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label class="label-form">Bairro</label>
+        <input pInputText type="text" class="form-control" name="bairro" [(ngModel)]="empresa.endereco.bairro">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label class="label-form">CEP</label>
+        <input pInputText type="text" class="form-control" name="cep" [(ngModel)]="empresa.endereco.cep">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label class="label-form">Número</label>
+        <input pInputText type="text" class="form-control" name="numero" [(ngModel)]="empresa.endereco.numero">
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label class="label-form">Observações</label>
+        <textarea [rows]="2" class="form-control" pInputTextarea name="observacoes" [(ngModel)]="empresa.endereco.observacoes"></textarea>
+      </div>
+    </div>
+    <div class="ui-g btn-container">
+      <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
+      <a pButton label="Pesquisa" class="btn btn-warning"></a>
+    </div>
+
+  </form>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastaConfig } from 'ngx-toasta';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'sipe-ui';
+
+
+  constructor(private toastaConfig: ToastaConfig) {
+    this.toastaConfig.theme = 'bootstrap';
+  }
+
+
+
+
 }

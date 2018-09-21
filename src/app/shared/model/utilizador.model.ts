@@ -5,11 +5,11 @@ export class Utilizador {
 
     codigo: number;
     nome: string;
-    cpf_cnpj: number;
+    cpfCnpj: number;
     ie: number;
-    im: number;
-    qtd_filiais: number;
-    numero_acessos: number;
+    inscricaoMunicipal: number;
+    quantidadeFiliais: number;
+    acessosPermitidos: number;
     ativo: boolean;
     endereco: Endereco = new Endereco();
     cidade: Cidade = new Cidade();

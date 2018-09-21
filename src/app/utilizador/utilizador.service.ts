@@ -10,13 +10,14 @@ export class UtilizadorService {
   constructor(private http: Http) { }
 
   adicionar(utilizador: Utilizador): Promise<any> {
+
     const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers.append('Content-Type', 'application/json');
 
     return this.http.post(this.utilizadoresUrl,
       JSON.stringify(utilizador), { headers: headers })
       .toPromise()
-      .then(response => {
-        console.log(response.json());
-      });
+      .then(response => response.json());
   }
 }
