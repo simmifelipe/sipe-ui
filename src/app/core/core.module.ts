@@ -1,3 +1,5 @@
+import { JwtHelper } from 'angular2-jwt';
+
 import { ErrorInterceptor } from './../helpers/error.interceptor';
 import { JwtInterceptor } from './../helpers/jwt.interceptor';
 import { AuthenticationService } from './../seguranca/authentication.service';
@@ -47,6 +49,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     ErrorHandlerService,
     // AuthService,
     AuthenticationService,
+    JwtHelper,
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

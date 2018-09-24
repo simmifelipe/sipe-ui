@@ -94,10 +94,15 @@
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label class="label-form">Cidade</label>
 
-        <p-autoComplete required class="form-control" field="cidade" [minLength]="3" [(ngModel)]="utilizador.cidade" field="nome"
+        <p-autoComplete required class="form-control" [minLength]="3" [(ngModel)]="utilizador.cidade" field="nome"
           [suggestions]="cidadesFiltradas" (completeMethod)="buscarCidades($event)" name="cidade" [forceSelection]="true"
-          #cid="ngModel"></p-autoComplete>
-          <app-message [control]="cid" error="required" text="Cidade é obrigatória"></app-message>
+          #cid="ngModel">
+          <ng-template let-cid pTemplate="utilizador.cidade">
+            <span style="font-size:18px">{{cid.nome + ' - ' + cid.estado}}</span>
+          </ng-template>
+        </p-autoComplete>
+
+        <app-message [control]="cid" error="required" text="Cidade é obrigatória"></app-message>
       </div>
 
       <div class="ui-g-12 ui-fluid">

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Injectable({
@@ -12,8 +11,7 @@ export class AuthService {
   jwtPayload: any;
 
   constructor(
-    private http: Http,
-    private jwtHelper: JwtHelperService) {
+    private http: Http) {
 
     this.carregarToken();
   }

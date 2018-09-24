@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Cidade } from './../shared/model/cidade.model';
@@ -7,15 +9,13 @@ export class CidadeService {
 
   cidadesUrl = "http://localhost:8082/cidades";
 
-  constructor(private http: Http) { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
-  pesquisarPorNome(nome: string): Promise<Cidade[]> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.http.get(`${this.cidadesUrl}/pesquisa/${nome}`, { headers: headers })
-      .toPromise()
-      .then(response => response.json());
+  pesquisarPorNome(nome: string): Promise<any> {
+    return this.httpClient.get<Cidade[]>(`${this.cidadesUrl}/pesquisa/${nome}`)
+      .toPromise();
   }
 
 }

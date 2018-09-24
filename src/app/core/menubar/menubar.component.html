@@ -35,8 +35,8 @@
         </a>
         <!--start submenu -->
         <ul>
-          <li><a routerLink="/utilizadores"><span class="title">Utilizador</span></a></li>
-          <li><a routerLink="/empresas"><span class="title">Empresa</span></a></li>
+          <li *ngIf="auth.temPermissao('ROLE_CADASTRAR_UTILIZADOR')"><a routerLink="/utilizadores"><span class="title">Utilizador</span></a></li>
+          <li *ngIf="auth.temPermissao('ROLE_CADASTRAR_EMPRESA')"><a routerLink="/empresas"><span class="title">Empresa</span></a></li>
         </ul>
         <!--end /submenu -->
       </li>

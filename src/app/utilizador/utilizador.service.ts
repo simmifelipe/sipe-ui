@@ -1,6 +1,6 @@
 import { first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -13,31 +13,18 @@ export class UtilizadorService {
   utilizadoresUrl = 'http://localhost:8082/utilizadores';
 
   constructor(
-    private http: Http,
-    private httpClient: HttpClient
+    private http: HttpClient
   ) { }
 
   adicionar(utilizador: Utilizador): Promise<any> {
-
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.post(this.utilizadoresUrl,
-      JSON.stringify(utilizador))
-      .toPromise()
-      .then(response => response.json());
+    return this.http.post<Utilizador>(this.utilizadoresUrl, JSON.stringify(utilizador))
+      .toPromise();
   }
 
 
-  buscarPorCodigo(codigo: number): Observable<Utilizador> {
-
-    // const headers = new Headers();
-    // headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-
-    return this.httpClient.get<Utilizador>(`${this.utilizadoresUrl}/${codigo}`)
-      .pipe(first());
-
+  buscarPorCodigo(codigo: number): Promise<any> {
+    return this.http.get<Utilizador>(`${this.utilizadoresUrl}/${codigo}`)
+      .toPromise();
   }
 
 }

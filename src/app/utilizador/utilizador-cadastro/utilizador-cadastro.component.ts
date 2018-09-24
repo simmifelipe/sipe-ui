@@ -1,4 +1,3 @@
-import { first } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -18,6 +17,8 @@ export class UtilizadorCadastroComponent implements OnInit {
 
   utilizador: Utilizador = new Utilizador();
   cidadesFiltradas: any[];
+  cidadeSelecionada: any;
+
 
   constructor(
     private utilizadorService: UtilizadorService,
@@ -40,7 +41,6 @@ export class UtilizadorCadastroComponent implements OnInit {
 
   carregarUtilizador(codigo: number) {
     this.utilizadorService.buscarPorCodigo(codigo)
-      .toPromise()
       .then(utl => this.utilizador = utl)
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -58,7 +58,9 @@ export class UtilizadorCadastroComponent implements OnInit {
   buscarCidades(event) {
     const texto = event.query;
     this.cidadeService.pesquisarPorNome(texto)
-      .then(cidades => this.cidadesFiltradas = cidades)
+      .then(cidades => {
+        this.cidadesFiltradas = cidades
+      })
       .catch(erro => this.errorHandler.handle(erro));
   }
 

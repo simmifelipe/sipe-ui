@@ -15,6 +15,7 @@
           <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
             <i class="fa fa-bars"></i>
           </a>
+          <button type="button" (click)="novoAccessToken()"> Novo Access Token</button>
         </li>
       </ul>
     </div>
@@ -65,7 +66,7 @@
           <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
             <img src="../../assets/img/avatar1.jpg" alt="" />
             <span class="profile-info">
-              Daniel Johnson
+              {{ auth.jwtPayload?.nome }}
               <small>Administrator</small>
             </span>
           </a>
