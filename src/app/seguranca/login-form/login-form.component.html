@@ -1,0 +1,51 @@
+<!-- BEGIN LOGIN SECTION -->
+<section class="section-account">
+
+  {{ authService.jwtPayload | json }}
+
+  <div class="img-backdrop"></div>
+  <div class="spacer"></div>
+  <div class="card contain-sm style-transparent">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <br />
+          <span class="text-lg text-bold text-primary">SIPE</span>
+          <br /><br />
+          <form autocomplete="off" #formulario="ngForm" class="form floating-label">
+            <div class="form-group">
+              <input pInputText type="email" class="form-control" id="username" name="usuario" ngModel #usuario>
+              <label for="username">E-mail</label>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" name="senha" ngModel #senha>
+              <label for="password">Senha</label>
+              <p class="help-block"><a href="#">Esqueceu?</a></p>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-xs-6 text-left">
+                <div class="checkbox checkbox-inline checkbox-styled">
+                  <label>
+                    <input type="checkbox"> <span>Lembrar-me</span>
+                  </label>
+                </div>
+              </div>
+              <!--end .col -->
+              <div class="col-xs-6 text-right">
+                <button pButton class="btn btn-primary btn-raised" label="Login" type="submit" [disabled]="formulario.invalid ? 'disabled' : ''"
+                  (click)="login(usuario.value, senha.value); senha.value = ''"></button>
+              </div>
+              <!--end .col -->
+            </div>
+            <!--end .row -->
+          </form>
+        </div>
+        <!--end .col -->
+      </div>
+      <!--end .row -->
+    </div>
+    <!--end .card-body -->
+  </div>
+  <!--end .card -->
+</section>

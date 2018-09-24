@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="exibirNavMenuBar()"></app-navbar>
 
 <div id="base">
 
@@ -7,17 +7,15 @@
     <div class="offcanvas"></div>
 
 
-    <div id="content" >
+    <div id="content">
         <section>
 
-            <!-- <app-utilizador-cadastro></app-utilizador-cadastro> -->
-            <!-- <app-empresa-cadastro></app-empresa-cadastro> -->
             <router-outlet></router-outlet>
 
         </section>
     </div>
 
 
-    <app-menubar></app-menubar>
+    <app-menubar *ngIf="exibirNavMenuBar()"></app-menubar>
 
 </div>

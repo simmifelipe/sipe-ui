@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-
 import { ToastaService } from 'ngx-toasta';
+
 
 
 @Injectable()
@@ -16,7 +16,7 @@ export class ErrorHandlerService {
       msg = errorResponse;
 
     } else if (errorResponse instanceof Response
-        && errorResponse.status >= 400 && errorResponse.status <= 499) {
+      && errorResponse.status >= 400 && errorResponse.status <= 499) {
       let errors;
       msg = 'Ocorreu um erro ao processar a sua solicitação';
 

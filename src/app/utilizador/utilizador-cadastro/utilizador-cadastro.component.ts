@@ -1,11 +1,13 @@
+import { first } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastaService } from 'ngx-toasta';
 import { CidadeService } from '../../cidade/cidade.service';
 import { Utilizador } from '../../shared/model/utilizador.model';
 import { UtilizadorService } from '../utilizador.service';
-import { Title } from '@angular/platform-browser';
+import { ErrorHandlerService } from './../../core/error-handler.service';
 
 @Component({
   selector: 'app-utilizador-cadastro',
@@ -23,40 +25,41 @@ export class UtilizadorCadastroComponent implements OnInit {
     private toastaService: ToastaService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title) { }
+    private title: Title,
+    private errorHandler: ErrorHandlerService) { }
 
   ngOnInit() {
 
-    this.title.setTitle('Sipe - Utilizador')
+    this.title.setTitle('Sipe - Utilizador');
 
     const codigoUtilizador = this.route.snapshot.params['codigo'];
     if (codigoUtilizador) {
-      this.carregarUtilizador(codigoUtilizador)
+      this.carregarUtilizador(codigoUtilizador);
     }
   }
 
   carregarUtilizador(codigo: number) {
     this.utilizadorService.buscarPorCodigo(codigo)
-      .then(utilizador => {
-        this.utilizador = utilizador;
-      })
-      .catch(erro => console.log(erro))
+      .toPromise()
+      .then(utl => this.utilizador = utl)
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   salvar(form: FormControl) {
     this.utilizadorService.adicionar(this.utilizador)
       .then(utilizadorAdicionado => {
 
-        this.toastaService.success('Utilizador salvo com sucesso!')
+        this.toastaService.success('Utilizador salvo com sucesso!');
         this.router.navigate(['/utilizadores', utilizadorAdicionado.codigo]);
       })
-      .catch(erro => console.log(erro));
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   buscarCidades(event) {
-    let query = event.query;
-    this.cidadeService.pesquisarPorNome(query)
-      .then(cidades => this.cidadesFiltradas = cidades);
+    const texto = event.query;
+    this.cidadeService.pesquisarPorNome(texto)
+      .then(cidades => this.cidadesFiltradas = cidades)
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   novo(form: FormControl) {
@@ -65,7 +68,7 @@ export class UtilizadorCadastroComponent implements OnInit {
     setTimeout(function () {
       this.utilizador = new Utilizador();
     }.bind(this), 1);
-    
+
     this.router.navigate(['/utilizadores/novo']);
   }
 

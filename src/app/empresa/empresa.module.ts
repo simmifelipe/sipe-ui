@@ -1,3 +1,4 @@
+import { EmpresaRoutingModule } from './empresa-routing.module';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,8 @@ import { EmpresaCadastroComponent } from './empresa-cadastro/empresa-cadastro.co
     CheckboxModule,
     InputTextareaModule,
 
-    SharedModule
+    SharedModule,
+    EmpresaRoutingModule
   ],
   declarations: [
     EmpresaCadastroComponent

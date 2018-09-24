@@ -10,7 +10,7 @@ export class Utilizador {
     inscricaoMunicipal: number;
     quantidadeFiliais: number;
     acessosPermitidos: number;
-    ativo: boolean = true;
+    ativo = true;
     endereco: Endereco = new Endereco();
     cidade: Cidade = new Cidade();
 

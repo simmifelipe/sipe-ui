@@ -7,7 +7,6 @@ import { EmpresaCadastroComponent } from './empresa/empresa-cadastro/empresa-cad
 
 const routes: Routes = [
     { path: '', redirectTo: 'utilizadores', pathMatch: 'full' },
-    { path: 'empresas', component: EmpresaCadastroComponent },
     { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
     { path: '**', redirectTo: 'pagina-nao-encontrada' },
 ];
