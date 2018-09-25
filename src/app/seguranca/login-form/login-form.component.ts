@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { AuthenticationService } from './../authentication.service';
 
-import { first } from 'rxjs/operators';
-
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',

@@ -7,7 +7,7 @@ import { AuthenticationService } from './authentication.service';
 export class NotAuthenticatedError { }
 
 @Injectable()
-export class MoneyHttp extends HttpClient {
+export class SipeHttp extends HttpClient {
 
     constructor(
         private auth: AuthenticationService,
@@ -53,7 +53,7 @@ export class MoneyHttp extends HttpClient {
                     if (this.auth.isAccessTokenInvalido()) {
                         throw new NotAuthenticatedError();
                     }
-
+                    
                     return fn().toPromise();
                 });
 

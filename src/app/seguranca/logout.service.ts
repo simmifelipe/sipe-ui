@@ -1,23 +1,23 @@
-import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
 
 import { environment } from './../../environments/environment';
-import { MoneyHttp } from './money-http';
+import { SipeHttp } from './sipe-http';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class LogoutService {
 
-  tokensRenokeUrl: string;
+  tokensRevokeUrl: string;
 
   constructor(
-    private http: MoneyHttp,
+    private http: SipeHttp,
     private auth: AuthenticationService
   ) {
-    this.tokensRenokeUrl = `${environment.apiUrl}/tokens/revoke`;
+    this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
   }
 
   logout() {
-    return this.http.delete(this.tokensRenokeUrl, { withCredentials: true })
+    return this.http.delete(this.tokensRevokeUrl, { withCredentials: true })
       .toPromise()
       .then(() => {
         this.auth.limparAccessToken();

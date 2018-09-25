@@ -1,4 +1,4 @@
-import { MoneyHttp } from './../seguranca/money-http';
+import { SipeHttp } from '../seguranca/sipe-http';
 
 import { Injectable } from '@angular/core';
 import { Cidade } from './../shared/model/cidade.model';
@@ -9,7 +9,7 @@ export class CidadeService {
   cidadesUrl = 'http://localhost:8082/cidades';
 
   constructor(
-    private httpClient: MoneyHttp
+    private httpClient: SipeHttp
   ) { }
 
   pesquisarPorNome(nome: string): Promise<any> {

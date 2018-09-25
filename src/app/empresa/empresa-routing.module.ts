@@ -1,11 +1,12 @@
+import { AuthGuard } from './../seguranca/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmpresaCadastroComponent } from './empresa-cadastro/empresa-cadastro.component';
 
 
 const routes: Routes = [
-    { path: 'empresas', component: EmpresaCadastroComponent },
-    { path: 'empresas/:codigo', component: EmpresaCadastroComponent },
+    { path: 'empresas', component: EmpresaCadastroComponent, canActivate: [AuthGuard] },
+    { path: 'empresas/:codigo', component: EmpresaCadastroComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

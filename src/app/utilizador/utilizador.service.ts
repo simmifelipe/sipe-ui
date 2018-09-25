@@ -1,5 +1,6 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { MoneyHttp } from './../seguranca/money-http';
+import { SipeHttp } from '../seguranca/sipe-http';
 import { Utilizador } from './../shared/model/utilizador.model';
 
 
@@ -7,9 +8,11 @@ import { Utilizador } from './../shared/model/utilizador.model';
 @Injectable()
 export class UtilizadorService {
 
-  utilizadoresUrl = 'http://localhost:8082/utilizadores';
+  utilizadoresUrl: string;
 
-  constructor(private http: MoneyHttp) { }
+  constructor(private http: SipeHttp) {
+    this.utilizadoresUrl = `${environment}/utilizadores`;
+  }
 
   adicionar(utilizador: Utilizador): Promise<Utilizador> {
     return this.http.post<Utilizador>(this.utilizadoresUrl, JSON.stringify(utilizador))

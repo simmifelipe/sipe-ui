@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { NotAuthenticatedError } from '../seguranca/sipe-http';
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { ToastaService } from 'ngx-toasta';
@@ -7,13 +9,19 @@ import { ToastaService } from 'ngx-toasta';
 @Injectable()
 export class ErrorHandlerService {
 
-  constructor(private toasta: ToastaService) { }
+  constructor(
+    private toasta: ToastaService,
+    private router: Router) { }
 
   handle(errorResponse: any) {
     let msg: string;
 
     if (typeof errorResponse === 'string') {
       msg = errorResponse;
+
+    } else if (errorResponse instanceof NotAuthenticatedError) {
+      msg = 'Sua sessão expirou!';
+      this.router.navigate(['/login']);
 
     } else if (errorResponse instanceof Response
       && errorResponse.status >= 400 && errorResponse.status <= 499) {

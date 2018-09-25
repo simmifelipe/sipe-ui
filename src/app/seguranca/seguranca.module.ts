@@ -7,9 +7,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { environment } from './../../environments/environment';
 import { LogoutService } from './logout.service';
 import { AuthGuard } from './auth.guard';
+import { environment } from '../../environments/environment';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -22,9 +22,7 @@ export function tokenGetter() {
 
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: environment.tokenWhitelistedDomains,
-        blacklistedRoutes: environment.tokenBlacklistedRoutes
+        tokenGetter: tokenGetter
       }
     }),
     ButtonModule,

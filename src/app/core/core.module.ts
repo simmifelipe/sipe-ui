@@ -1,6 +1,6 @@
 import { EmpresaModule } from './../empresa/empresa.module';
 import { UtilizadorModule } from './../utilizador/utilizador.module';
-import { MoneyHttp } from './../seguranca/money-http';
+import { SipeHttp } from '../seguranca/sipe-http';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -53,7 +53,7 @@ registerLocaleData(localePt);
     EmpresaService,
     ErrorHandlerService,
     AuthenticationService,
-    MoneyHttp,
+    SipeHttp,
 
     JwtHelperService,
     Title,
