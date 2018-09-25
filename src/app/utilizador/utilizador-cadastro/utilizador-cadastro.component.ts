@@ -19,7 +19,6 @@ export class UtilizadorCadastroComponent implements OnInit {
   cidadesFiltradas: any[];
   cidadeSelecionada: any;
 
-
   constructor(
     private utilizadorService: UtilizadorService,
     private cidadeService: CidadeService,
@@ -59,7 +58,7 @@ export class UtilizadorCadastroComponent implements OnInit {
     const texto = event.query;
     this.cidadeService.pesquisarPorNome(texto)
       .then(cidades => {
-        this.cidadesFiltradas = cidades
+        this.cidadesFiltradas = cidades;
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

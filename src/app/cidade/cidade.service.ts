@@ -1,16 +1,15 @@
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { MoneyHttp } from './../seguranca/money-http';
+
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
 import { Cidade } from './../shared/model/cidade.model';
 
 @Injectable()
 export class CidadeService {
 
-  cidadesUrl = "http://localhost:8082/cidades";
+  cidadesUrl = 'http://localhost:8082/cidades';
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: MoneyHttp
   ) { }
 
   pesquisarPorNome(nome: string): Promise<any> {

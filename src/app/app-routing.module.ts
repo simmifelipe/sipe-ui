@@ -1,3 +1,4 @@
+import { NaoAutorizadoComponent } from './core/nao-autorizado/nao-autorizado.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada/pagina-nao-encontrada.component';
@@ -8,6 +9,7 @@ import { EmpresaCadastroComponent } from './empresa/empresa-cadastro/empresa-cad
 const routes: Routes = [
     { path: '', redirectTo: 'utilizadores', pathMatch: 'full' },
     { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
+    { path: 'nao-autorizado', component: NaoAutorizadoComponent },
     { path: '**', redirectTo: 'pagina-nao-encontrada' },
 ];
 

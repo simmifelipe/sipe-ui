@@ -20,28 +20,14 @@ export class LoginFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  // login(usuario: string, senha: string) {
-  //   this.authService.login(usuario, senha)
-  //     .then(() => {
-  //       this.router.navigate(['/utilizadores']);
-  //     })
-  //     .catch(erro => {
-  //       this.errorHandler.handle(erro);
-  //     });
-  // }
-
   login(usuario: string, senha: string) {
-
     this.authService.login(usuario, senha)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate(['/utilizadores']);
-        },
-        error => {
-          this.errorHandler.handle(error);
-        });
-
+      .then(() => {
+        this.router.navigate(['/utilizadores']);
+      })
+      .catch(erro => {
+        this.errorHandler.handle(erro);
+      });
   }
 
 

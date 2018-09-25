@@ -1,28 +1,23 @@
-import { first } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Headers, Http } from '@angular/http';
 import { Injectable } from '@angular/core';
-
-
+import { MoneyHttp } from './../seguranca/money-http';
 import { Utilizador } from './../shared/model/utilizador.model';
+
+
 
 @Injectable()
 export class UtilizadorService {
 
   utilizadoresUrl = 'http://localhost:8082/utilizadores';
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: MoneyHttp) { }
 
-  adicionar(utilizador: Utilizador): Promise<any> {
+  adicionar(utilizador: Utilizador): Promise<Utilizador> {
     return this.http.post<Utilizador>(this.utilizadoresUrl, JSON.stringify(utilizador))
       .toPromise();
   }
 
 
-  buscarPorCodigo(codigo: number): Promise<any> {
+  buscarPorCodigo(codigo: number): Promise<Utilizador> {
     return this.http.get<Utilizador>(`${this.utilizadoresUrl}/${codigo}`)
       .toPromise();
   }

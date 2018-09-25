@@ -1,40 +1,46 @@
-import { JwtHelper } from 'angular2-jwt';
-
-import { ErrorInterceptor } from './../helpers/error.interceptor';
-import { JwtInterceptor } from './../helpers/jwt.interceptor';
-import { AuthenticationService } from './../seguranca/authentication.service';
-import { CommonModule } from '@angular/common';
+import { EmpresaModule } from './../empresa/empresa.module';
+import { UtilizadorModule } from './../utilizador/utilizador.module';
+import { MoneyHttp } from './../seguranca/money-http';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import localePt from '@angular/common/locales/pt';
 
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastaModule } from 'ngx-toasta';
+
 
 import { CidadeService } from './../cidade/cidade.service';
 import { EmpresaService } from './../empresa/empresa.service';
-import { AuthService } from './../seguranca/auth.service';
+import { AuthenticationService } from './../seguranca/authentication.service';
 import { UtilizadorService } from './../utilizador/utilizador.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { MenubarComponent } from './menubar/menubar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
 
+
+registerLocaleData(localePt);
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
-    RouterModule,
     HttpClientModule,
+    RouterModule,
 
-    ToastaModule.forRoot()
+    ToastaModule.forRoot(),
+
+    UtilizadorModule,
+    EmpresaModule
   ],
   declarations: [
     NavbarComponent,
     MenubarComponent,
-    PaginaNaoEncontradaComponent
+    PaginaNaoEncontradaComponent,
+    NaoAutorizadoComponent
   ],
   exports: [
     NavbarComponent,
@@ -42,17 +48,18 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     ToastaModule
   ],
   providers: [
-    Title,
     UtilizadorService,
     CidadeService,
     EmpresaService,
     ErrorHandlerService,
-    // AuthService,
     AuthenticationService,
-    JwtHelper,
-    { provide: LOCALE_ID, useValue: 'pt-BR' },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    MoneyHttp,
+
+    JwtHelperService,
+    Title,
+    { provide: LOCALE_ID, useValue: 'pt' }
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
 export class CoreModule { }

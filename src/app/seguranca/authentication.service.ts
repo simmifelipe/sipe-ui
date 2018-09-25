@@ -1,87 +1,111 @@
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtHelper } from 'angular2-jwt';
-import { map } from 'rxjs/operators';
+
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from './../../environments/environment';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
-    oauthTokenUrl = 'http://localhost:8082/oauth/token';
+    oauthTokenUrl: string;
     jwtPayload: any;
 
     constructor(
         private http: HttpClient,
-        private jwtHelper: JwtHelper
+        private jwtHelper: JwtHelperService
     ) {
-
-        this.carregarAccessToken();
+        this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
+        this.carregarToken();
     }
 
-    login(usuario: string, senha: string) {
 
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic YW5ndWxhcjpnM3Nmd3JAbmd1bEBy'
-            }),
-            withCredentials: true
-        };
+    login(usuario: string, senha: string): Promise<void> {
+        const headers = new HttpHeaders()
+            .append('Content-Type', 'application/x-www-form-urlencoded')
+            .append('Authorization', 'Basic YW5ndWxhcjpnM3Nmd3JAbmd1bEBy');
+
         const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-        return this.http.post<any>(this.oauthTokenUrl, body, httpOptions)
-            .pipe(map(token => {
-                if (token && token.access_token) {
-                    this.jwtPayload = this.jwtHelper.decodeToken(token.access_token);
-                    this.armazenarToken(token.access_token);
+        return this.http.post<any>(this.oauthTokenUrl, body,
+            { headers, withCredentials: true })
+            .toPromise()
+            .then(response => {
+                console.log(response);
+                this.armazenarToken(response.access_token);
+            })
+            .catch(response => {
+                if (response.status === 400) {
+                    if (response.error === 'invalid_grant') {
+                        return Promise.reject('Usuário ou senha inválida!');
+                    }
                 }
-                return token;
-            }));
+
+                return Promise.reject(response);
+            });
     }
 
 
     obterNovoAccessToken(): Promise<void> {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic YW5ndWxhcjpnM3Nmd3JAbmd1bEBy'
-            }),
-            withCredentials: true
-        };
+        const headers = new HttpHeaders()
+            .append('Content-Type', 'application/x-www-form-urlencoded')
+            .append('Authorization', 'Basic YW5ndWxhcjpnM3Nmd3JAbmd1bEBy');
+
         const body = 'grant_type=refresh_token';
 
-        return this.http.post<any>(this.oauthTokenUrl, body, httpOptions)
+        return this.http.post<any>(this.oauthTokenUrl, body,
+            { headers, withCredentials: true })
             .toPromise()
             .then(response => {
-                this.armazenarToken(response.json().access_token);
+                this.armazenarToken(response.access_token);
 
-                console.log('Novo access token criado');
+                console.log('Novo access token criado!');
+
                 return Promise.resolve(null);
             })
             .catch(response => {
-                console.log('Erro ao renovar token', response);
+                console.error('Erro ao renovar token.', response);
                 return Promise.resolve(null);
             });
     }
 
-    armazenarToken(access_token: string) {
-        localStorage.setItem('access_token', access_token);
+    limparAccessToken() {
+        localStorage.removeItem('token');
+        this.jwtPayload = null;
     }
 
-    logout() {
-        localStorage.removeItem('access_token');
+    isAccessTokenInvalido() {
+        const token = localStorage.getItem('token');
+        return !token || this.jwtHelper.isTokenExpired(token);
     }
 
     temPermissao(permissao: string) {
         return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
     }
 
-    carregarAccessToken() {
-        const token = localStorage.getItem('access_token');
+    temQualquerPermissao(roles) {
+        for (const role of roles) {
+            if (this.temPermissao(role)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private armazenarToken(token: string) {
+        this.jwtPayload = this.jwtHelper.decodeToken(token);
+        localStorage.setItem('token', token);
+    }
+
+    private carregarToken() {
+        const token = localStorage.getItem('token');
+
         if (token) {
-            this.jwtPayload = this.jwtHelper.decodeToken(token);
+            this.armazenarToken(token);
         }
     }
+
 
 
 }
