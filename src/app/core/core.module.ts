@@ -21,6 +21,7 @@ import { MenubarComponent } from './menubar/menubar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
+import { UsuarioModule } from '../usuario/usuario.module';
 
 
 registerLocaleData(localePt);
@@ -34,7 +35,8 @@ registerLocaleData(localePt);
     ToastaModule.forRoot(),
 
     UtilizadorModule,
-    EmpresaModule
+    EmpresaModule,
+    UsuarioModule
   ],
   declarations: [
     NavbarComponent,
