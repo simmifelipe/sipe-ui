@@ -1,3 +1,77 @@
-<p>
-  usuario-cadastro works!
-</p>
+<div class="section-body contain-lg">
+
+  <div>
+    <h1>Novo Usuário</h1>
+  </div>
+
+  <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
+
+    <div class="divisor">
+      <label>Preencha as informações</label>
+      <hr>
+    </div>
+
+    <div class="ui-g formulario">
+
+      <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+        <label class="label-form">Nome do usuário</label>
+
+        <input pInputText type="text" name="nome" [(ngModel)]="usuario.nome" #nome="ngModel" required minlength="5"
+          class="form-control">
+        <app-message [control]="nome" error="required" text="Nome é obrigatório"></app-message>
+        <app-message [control]="nome" error="minlength" text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+        <label class="label-form">E-mail</label>
+
+        <input pInputText type="text" required class="form-control" name="email" [(ngModel)]="usuario.email"
+          #email="ngModel">
+        <app-message [control]="email" error="required" text="E-mail é obrigatório"></app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
+        <label class="label-form">Senha</label>
+        <input pInputText type="text" class="form-control" name="senha" [(ngModel)]="usuario.senha">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">Situação</label>
+        <div class="ui-g-12">
+          <p-checkbox label="Ativo" binary=true name="ativo" [(ngModel)]="usuario.ativo"></p-checkbox>
+        </div>
+      </div>
+
+        <div class="ui-g ui-g-12">
+          <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
+          <button pButton type="button" label="Novo" class="btn btn-primary" (click)="novo(formulario)"></button>
+          <a pButton label="Pesquisa" class="btn btn-warning"></a>
+        </div>
+
+        <div class="ui-g-12">
+        <div class="divisor">
+          <label>Liberar empresas para o usuário</label>
+          <hr>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+
+        <p-dataTable class="form-control" [value]="empresas" [responsive]="true">
+            <p-column header="Selecione">
+                <p-checkbox label="" binary=true name="select"></p-checkbox>
+            </p-column>
+            <p-column field="nome" header="Nome da empresa"></p-column>
+            <p-column field="cpfCnpj" header="CPF/CNPJ"></p-column>
+            <p-column header="Nível de liberação"></p-column>
+          </p-dataTable>
+      </div>
+    </div>
+
+  </form>
+
+
+
+</div>

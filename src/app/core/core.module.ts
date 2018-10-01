@@ -22,6 +22,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
 import { UsuarioModule } from '../usuario/usuario.module';
+import { UsuarioService } from '../usuario/usuario.service';
 
 
 registerLocaleData(localePt);
@@ -50,6 +51,7 @@ registerLocaleData(localePt);
     ToastaModule
   ],
   providers: [
+    UsuarioService,
     UtilizadorService,
     CidadeService,
     EmpresaService,
