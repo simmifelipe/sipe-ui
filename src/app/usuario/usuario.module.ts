@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { ButtonModule } from 'primeng/button';
-import { DataTableModule } from 'primeng/datatable';
+import {DropdownModule} from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
+import { TableModule } from 'primeng/table';
 
 import { SharedModule } from '../shared/shared.module';
 import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
@@ -18,7 +19,9 @@ import { UsuarioRoutingModule } from './usuario-routing-module';
 
     CheckboxModule,
     ButtonModule,
-    DataTableModule,
+    TableModule,
+    DropdownModule,
+
 
     UsuarioRoutingModule,
     SharedModule

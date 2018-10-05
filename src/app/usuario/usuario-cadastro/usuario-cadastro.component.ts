@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { FormControl } from '@angular/forms';
+import { SelectItem } from 'primeng/components/common/selectitem';
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -14,13 +15,21 @@ import { FormControl } from '@angular/forms';
 })
 export class UsuarioCadastroComponent implements OnInit {
 
-  empresas = [
-    { codigo: 1, nome: 'Empresa de teste 1', cpfCnpj: '01.002.003/0004-05',
-      nivel: null },
-    { codigo: 2, nome: 'Empresa de teste 2', cpfCnpj: '01.002.003/0004-05',
-      nivel: null },
-    { codigo: 3, nome: 'Empresa de teste 3', cpfCnpj: '01.002.003/0004-05',
-      nivel: null },
+  cols: any[];
+  cities1: SelectItem[];
+  cars = [
+    {
+      codigo: 1, nome: 'Empresa de teste 1', cpfCnpj: '01.002.003/0004-05',
+      nivel: null
+    },
+    {
+      codigo: 2, nome: 'Empresa de teste 2', cpfCnpj: '01.002.003/0004-05',
+      nivel: null
+    },
+    {
+      codigo: 3, nome: 'Empresa de teste 3', cpfCnpj: '01.002.003/0004-05',
+      nivel: null
+    },
   ];
 
 
@@ -34,9 +43,26 @@ export class UsuarioCadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private title: Title,
-    private errorHandler: ErrorHandlerService) { }
+    private errorHandler: ErrorHandlerService) { 
+
+      this.cities1 = [
+        {label:'Select City', value:null},
+        {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
+        {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
+        {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
+        {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
+        {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
+    ];
+    }
 
   ngOnInit() {
+
+    this.cols = [
+      { field: 'codigo', header: 'Codigo' },
+      { field: 'nome', header: 'Nome' },
+      { field: 'cpfCnpj', header: 'Doc.' },
+    ];
+
 
     this.title.setTitle('Sipe - Usuario');
 

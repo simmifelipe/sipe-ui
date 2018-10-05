@@ -26,8 +26,7 @@
       <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
         <label class="label-form">E-mail</label>
 
-        <input pInputText type="text" required class="form-control" name="email" [(ngModel)]="usuario.email"
-          #email="ngModel">
+        <input pInputText type="text" required class="form-control" name="email" [(ngModel)]="usuario.email" #email="ngModel">
         <app-message [control]="email" error="required" text="E-mail é obrigatório"></app-message>
 
       </div>
@@ -44,13 +43,7 @@
         </div>
       </div>
 
-        <div class="ui-g ui-g-12">
-          <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
-          <button pButton type="button" label="Novo" class="btn btn-primary" (click)="novo(formulario)"></button>
-          <a pButton label="Pesquisa" class="btn btn-warning"></a>
-        </div>
-
-        <div class="ui-g-12">
+      <div class="ui-g-12">
         <div class="divisor">
           <label>Liberar empresas para o usuário</label>
           <hr>
@@ -59,14 +52,41 @@
 
       <div class="ui-g-12">
 
-        <p-dataTable class="form-control" [value]="empresas" [responsive]="true">
-            <p-column header="Selecione">
-                <p-checkbox label="" binary=true name="select"></p-checkbox>
-            </p-column>
-            <p-column field="nome" header="Nome da empresa"></p-column>
-            <p-column field="cpfCnpj" header="CPF/CNPJ"></p-column>
-            <p-column header="Nível de liberação"></p-column>
-          </p-dataTable>
+        <p-table [columns]="cols" [value]="cars" dataKey="codigo">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th style="width: 3em">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <td>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+              </td>
+              <!-- <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+              </td> -->
+              <td>
+                <p-dropdown [options]="cities1"></p-dropdown>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+
+          </ng-template>
+        </p-table>
+
+        <div class="ui-g ui-g-12">
+          <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
+          <button pButton type="button" label="Novo" class="btn btn-primary" (click)="novo(formulario)"></button>
+          <a pButton label="Pesquisa" class="btn btn-warning"></a>
+        </div>
+
       </div>
     </div>
 
