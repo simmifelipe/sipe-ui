@@ -1,4 +1,4 @@
-import { Endereco } from "./endereco.model";
+import { Endereco } from './endereco.model';
 import { Utilizador } from './utilizador.model';
 
 export class Empresa {

@@ -1,12 +1,14 @@
-import { Usuario } from './../../shared/model/usuario.model';
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../usuario.service';
-import { ToastaService } from 'ngx-toasta';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { ErrorHandlerService } from '../../core/error-handler.service';
 import { FormControl } from '@angular/forms';
+
 import { SelectItem } from 'primeng/components/common/selectitem';
+
+import { ErrorHandlerService } from '../../core/error-handler.service';
+import { Usuario } from './../../shared/model/usuario.model';
+import { UsuarioService } from '../usuario.service';
+import { ToastaService } from 'ngx-toasta';
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -15,20 +17,32 @@ import { SelectItem } from 'primeng/components/common/selectitem';
 })
 export class UsuarioCadastroComponent implements OnInit {
 
-  cols: any[];
-  cities1: SelectItem[];
-  cars = [
+  colunas: any[];
+  niveis: SelectItem[];
+  empresas = [
     {
-      codigo: 1, nome: 'Empresa de teste 1', cpfCnpj: '01.002.003/0004-05',
-      nivel: null
+      codigo: 1, nome: 'Empresa de teste 1', cpfCnpj: '01.002.003/0001-02',
+      modulo: 1, nivel: null, chave: 11
     },
     {
-      codigo: 2, nome: 'Empresa de teste 2', cpfCnpj: '01.002.003/0004-05',
-      nivel: null
+      codigo: 1, nome: 'Empresa de teste 1', cpfCnpj: '01.002.003/0001-02',
+      modulo: 2, nivel: null, chave: 12
     },
     {
-      codigo: 3, nome: 'Empresa de teste 3', cpfCnpj: '01.002.003/0004-05',
-      nivel: null
+      codigo: 2, nome: 'Empresa de teste 2', cpfCnpj: '01.002.003/0002-05',
+      modulo: 1, nivel: null, chave: 21
+    },
+    {
+      codigo: 2, nome: 'Empresa de teste 2', cpfCnpj: '01.002.003/0002-05',
+      modulo: 2, nivel: null, chave: 22
+    },
+    {
+      codigo: 3, nome: 'Empresa de teste 3', cpfCnpj: '01.002.003/0003-07',
+      modulo: 1, nivel: null, chave: 31
+    },
+    {
+      codigo: 3, nome: 'Empresa de teste 3', cpfCnpj: '01.002.003/0003-07',
+      modulo: 2, nivel: null, chave: 32
     },
   ];
 
@@ -43,24 +57,25 @@ export class UsuarioCadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private title: Title,
-    private errorHandler: ErrorHandlerService) { 
+    private errorHandler: ErrorHandlerService) {
 
-      this.cities1 = [
-        {label:'Select City', value:null},
-        {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-        {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-        {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-        {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-        {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
+    this.niveis = [
+      { label: 'Selecione...', value: null },
+      { label: 'Administrador', value: 2 },
+      { label: 'Avançado', value: 3 },
+      { label: 'Intermediário', value: 4 },
+      { label: 'Básico', value: 5 },
     ];
-    }
+  }
 
   ngOnInit() {
 
-    this.cols = [
-      { field: 'codigo', header: 'Codigo' },
+    this.colunas = [
+      { field: 'codigo', header: 'Código' },
       { field: 'nome', header: 'Nome' },
-      { field: 'cpfCnpj', header: 'Doc.' },
+      { field: 'cpfCnpj', header: 'CPF/CNPJ' },
+      { field: 'modulo', header: 'Módulo' },
+      { field: 'nivel', header: 'Níveis de acesso' },
     ];
 
 
