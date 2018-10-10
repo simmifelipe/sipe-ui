@@ -26,7 +26,7 @@
       <div class="ui-g-12 ui-md-6 ui-lg-6 ui-fluid">
         <label class="label-form">E-mail</label>
 
-        <input pInputText type="text" required class="form-control" name="email" [(ngModel)]="usuario.email" #email="ngModel">
+        <input pInputText type="text" required email class="form-control" name="email" [(ngModel)]="usuario.email" #email="ngModel">
         <app-message [control]="email" error="required" text="E-mail é obrigatório"></app-message>
 
       </div>

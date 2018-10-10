@@ -25,6 +25,8 @@ import { ModuloService } from './../modulo/modulo.service';
 import { EmpresaModule } from './../empresa/empresa.module';
 import { UtilizadorModule } from './../utilizador/utilizador.module';
 import { SipeHttp } from '../seguranca/sipe-http';
+import { PermissaoService } from '../permissao/permissao.service';
+import { PermissaoModule } from '../permissao/permissao.module';
 
 
 registerLocaleData(localePt);
@@ -40,7 +42,8 @@ registerLocaleData(localePt);
     UtilizadorModule,
     EmpresaModule,
     UsuarioModule,
-    ModuloModule
+    ModuloModule,
+    PermissaoModule
   ],
   declarations: [
     NavbarComponent,
@@ -59,6 +62,7 @@ registerLocaleData(localePt);
     CidadeService,
     EmpresaService,
     ModuloService,
+    PermissaoService,
     ErrorHandlerService,
     AuthenticationService,
     SipeHttp,

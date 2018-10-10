@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { ButtonModule } from 'primeng/button';
-import {DropdownModule} from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
 
@@ -21,7 +21,6 @@ import { UsuarioRoutingModule } from './usuario-routing-module';
     ButtonModule,
     TableModule,
     DropdownModule,
-
 
     UsuarioRoutingModule,
     SharedModule

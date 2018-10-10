@@ -48,8 +48,6 @@ export class UsuarioCadastroComponent implements OnInit {
 
 
   usuario: Usuario = new Usuario();
-  // cidadesFiltradas: any[];
-  // cidadeSelecionada: any;
 
   constructor(
     private usuarioService: UsuarioService,
