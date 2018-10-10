@@ -22,7 +22,9 @@ export function tokenGetter() {
 
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter
+        tokenGetter: tokenGetter,
+        blacklistedRoutes: environment.tokenBlacklistedRoutes,
+        whitelistedDomains: environment.tokenWhitelistedDomains
       }
     }),
     ButtonModule,

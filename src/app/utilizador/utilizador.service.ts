@@ -11,10 +11,11 @@ export class UtilizadorService {
   utilizadoresUrl: string;
 
   constructor(private http: SipeHttp) {
-    this.utilizadoresUrl = `${environment}/utilizadores`;
+    this.utilizadoresUrl = `${environment.apiUrl}/utilizadores`;
   }
 
   adicionar(utilizador: Utilizador): Promise<Utilizador> {
+    console.log(utilizador);
     return this.http.post<Utilizador>(this.utilizadoresUrl, JSON.stringify(utilizador))
       .toPromise();
   }
