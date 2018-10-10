@@ -1,6 +1,3 @@
-import { EmpresaModule } from './../empresa/empresa.module';
-import { UtilizadorModule } from './../utilizador/utilizador.module';
-import { SipeHttp } from '../seguranca/sipe-http';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -23,6 +20,11 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao
 import { NaoAutorizadoComponent } from './nao-autorizado/nao-autorizado.component';
 import { UsuarioModule } from '../usuario/usuario.module';
 import { UsuarioService } from '../usuario/usuario.service';
+import { ModuloModule } from './../modulo/modulo.module';
+import { ModuloService } from './../modulo/modulo.service';
+import { EmpresaModule } from './../empresa/empresa.module';
+import { UtilizadorModule } from './../utilizador/utilizador.module';
+import { SipeHttp } from '../seguranca/sipe-http';
 
 
 registerLocaleData(localePt);
@@ -37,7 +39,8 @@ registerLocaleData(localePt);
 
     UtilizadorModule,
     EmpresaModule,
-    UsuarioModule
+    UsuarioModule,
+    ModuloModule
   ],
   declarations: [
     NavbarComponent,
@@ -55,6 +58,7 @@ registerLocaleData(localePt);
     UtilizadorService,
     CidadeService,
     EmpresaService,
+    ModuloService,
     ErrorHandlerService,
     AuthenticationService,
     SipeHttp,

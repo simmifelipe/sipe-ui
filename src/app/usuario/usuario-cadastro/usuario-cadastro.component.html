@@ -13,7 +13,7 @@
 
     <div class="ui-g formulario">
 
-      <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-lg-6 ui-fluid">
         <label class="label-form">Nome do usuário</label>
 
         <input pInputText type="text" name="nome" [(ngModel)]="usuario.nome" #nome="ngModel" required minlength="5"
@@ -23,7 +23,7 @@
 
       </div>
 
-      <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-lg-6 ui-fluid">
         <label class="label-form">E-mail</label>
 
         <input pInputText type="text" required class="form-control" name="email" [(ngModel)]="usuario.email" #email="ngModel">
@@ -33,7 +33,7 @@
 
       <div class="ui-g-12 ui-md-4 ui-lg-4 ui-fluid">
         <label class="label-form">Senha</label>
-        <input pInputText type="text" class="form-control" name="senha" [(ngModel)]="usuario.senha">
+        <input pInputText type="password" class="form-control" name="senha" [(ngModel)]="usuario.senha">
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
@@ -52,7 +52,7 @@
 
       <div class="ui-g-12">
 
-        <p-table [columns]="cols" [value]="cars" dataKey="codigo">
+        <p-table [columns]="colunas" [value]="empresas" dataKey="chave">
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th style="width: 3em">
@@ -68,11 +68,11 @@
               <td>
                 <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
               </td>
-              <!-- <td *ngFor="let col of columns">
+              <td *ngFor="let col of columns; last as isLast">
                 {{rowData[col.field]}}
-              </td> -->
-              <td>
-                <p-dropdown [options]="cities1"></p-dropdown>
+                <span *ngIf="isLast">
+                  <p-dropdown [options]="niveis"></p-dropdown>
+                </span>
               </td>
             </tr>
           </ng-template>
