@@ -27,7 +27,7 @@ export class EmpresaCadastroComponent implements OnInit {
 
   salvar(form: FormControl) {
 
-    this.empresa.utilizador.codigo = 1; // TODO: Alterar para utilizador logado.
+    this.empresa.utilizador.codigo = 2; // TODO: Alterar para utilizador logado.
 
     this.empresaService.adicionar(this.empresa)
       .then(() => {
