@@ -1,7 +1,8 @@
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from as observableFromPromise, Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
+import { RequestOptions } from '@angular/http';
 
 
 export class NotAuthenticatedError { }

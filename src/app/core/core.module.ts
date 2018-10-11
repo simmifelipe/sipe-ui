@@ -27,6 +27,7 @@ import { UtilizadorModule } from './../utilizador/utilizador.module';
 import { SipeHttp } from '../seguranca/sipe-http';
 import { PermissaoService } from '../permissao/permissao.service';
 import { PermissaoModule } from '../permissao/permissao.module';
+import { FormatDocService } from '../shared/format-doc.service';
 
 
 registerLocaleData(localePt);
@@ -65,13 +66,12 @@ registerLocaleData(localePt);
     PermissaoService,
     ErrorHandlerService,
     AuthenticationService,
+    FormatDocService,
     SipeHttp,
 
     JwtHelperService,
     Title,
     { provide: LOCALE_ID, useValue: 'pt' }
-    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
 export class CoreModule { }

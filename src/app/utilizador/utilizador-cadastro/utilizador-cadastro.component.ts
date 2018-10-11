@@ -1,3 +1,4 @@
+import { FormatDocService } from './../../shared/format-doc.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -19,6 +20,7 @@ export class UtilizadorCadastroComponent implements OnInit {
   cidadesFiltradas: any[];
   cidadeSelecionada: any;
 
+
   constructor(
     private utilizadorService: UtilizadorService,
     private cidadeService: CidadeService,
@@ -26,7 +28,8 @@ export class UtilizadorCadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private title: Title,
-    private errorHandler: ErrorHandlerService) { }
+    private errorHandler: ErrorHandlerService,
+    private formatDocService: FormatDocService) { }
 
   ngOnInit() {
 
@@ -44,7 +47,8 @@ export class UtilizadorCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  salvar(form: FormControl) {
+  salvar() {
+    this.removeMascara();
     this.utilizadorService.adicionar(this.utilizador)
       .then(utilizadorAdicionado => {
 
@@ -73,7 +77,17 @@ export class UtilizadorCadastroComponent implements OnInit {
     this.router.navigate(['/utilizadores/novo']);
   }
 
+  formataDocumento(valor: any) {
+    return this.formatDocService.format(valor);
+  }
 
+  removeMascara(){
+    if (this.utilizador) {
+      if (this.utilizador.cpfCnpj) {
+        this.utilizador.cpfCnpj = this.formatDocService.unFormat(this.utilizador.cpfCnpj);
+      }
+    }
+  }
 
 
 }

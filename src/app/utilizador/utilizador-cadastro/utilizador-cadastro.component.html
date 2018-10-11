@@ -27,7 +27,7 @@
         <label class="label-form">CPF/CNPJ</label>
 
         <input pInputText type="text" required class="form-control" name="cpfCnpj" [(ngModel)]="utilizador.cpfCnpj"
-          #cpfCnpj="ngModel">
+          #cpfCnpj="ngModel" (blur)="utilizador.cpfCnpj = formataDocumento(utilizador.cpfCnpj)">
         <app-message [control]="cpfCnpj" error="required" text="CPF/CNPJ é obrigatório"></app-message>
 
       </div>

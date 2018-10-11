@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
 import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
 
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -20,10 +21,13 @@ export function tokenGetter() {
     CommonModule,
     FormsModule,
 
+    HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter
-      }
+        tokenGetter: tokenGetter,
+        blacklistedRoutes: environment.tokenBlacklistedRoutes,
+        whitelistedDomains: environment.tokenWhitelistedDomains
+      },
     }),
     ButtonModule,
 
