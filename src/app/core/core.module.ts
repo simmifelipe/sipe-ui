@@ -1,3 +1,4 @@
+import { TarefaTemplateModule } from './../tarefa-template/tarefa-template.module';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -28,6 +29,7 @@ import { SipeHttp } from '../seguranca/sipe-http';
 import { PermissaoService } from '../permissao/permissao.service';
 import { PermissaoModule } from '../permissao/permissao.module';
 import { FormatDocService } from '../shared/format-doc.service';
+import { TarefaTemplateService } from '../tarefa-template/tarefa-template.service';
 
 
 registerLocaleData(localePt);
@@ -44,7 +46,8 @@ registerLocaleData(localePt);
     EmpresaModule,
     UsuarioModule,
     ModuloModule,
-    PermissaoModule
+    PermissaoModule,
+    TarefaTemplateModule
   ],
   declarations: [
     NavbarComponent,
@@ -64,6 +67,7 @@ registerLocaleData(localePt);
     EmpresaService,
     ModuloService,
     PermissaoService,
+    TarefaTemplateService,
     ErrorHandlerService,
     AuthenticationService,
     FormatDocService,

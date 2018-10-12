@@ -6,7 +6,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 
 import { ModuloCadastroComponent } from './modulo-cadastro/modulo-cadastro.component';
-import { ModuloRoutingModule } from './modulo-routing-module';
+import { ModuloRoutingModule } from './modulo-routing.module';
 import { SharedModule } from './../shared/shared.module';
 
 @NgModule({
