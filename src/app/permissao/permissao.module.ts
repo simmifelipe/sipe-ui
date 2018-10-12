@@ -6,7 +6,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 
 import { PermissaoCadastroComponent } from './permissao-cadastro/permissao-cadastro.component';
-import { PermissaoRoutingModule } from './permissao-routing-module';
+import { PermissaoRoutingModule } from './permissao-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { TableModule } from 'primeng/table';
 

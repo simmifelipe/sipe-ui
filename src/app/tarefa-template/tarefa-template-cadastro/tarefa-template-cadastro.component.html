@@ -1,36 +1,40 @@
 <div class="section-body contain-lg">
 
   <div>
-    <h1>Cadastro de permissões</h1>
+    <h1>Cadastro de Template de Tarefas</h1>
   </div>
 
   <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
 
     <div class="ui-g formulario">
 
-      <div class="ui-g-12 ui-md-12 ui-lg-10 ui-fluid">
-        <label class="label-form">Descrição da permissão</label>
+      <div class="ui-g-12 ui-md-12 ui-lg-12 ui-fluid">
+        <label class="label-form">Descrição da tarefa</label>
 
-        <input pInputText type="text" name="descricao" [(ngModel)]="permissao.descricao" #descricao="ngModel" required
-          minlength="5" class="form-control">
+        <input pInputText type="text" name="descricao" [(ngModel)]="tarefaTemplate.descricao" #descricao="ngModel"
+          required minlength="5" class="form-control">
         <app-message [control]="descricao" error="required" text="Descrição é obrigatória"></app-message>
         <app-message [control]="descricao" error="minlength" text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message>
 
       </div>
 
       <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
-        <label class="label-form">Módulo</label>
+        <label class="label-form">Tipo de tarefa</label>
 
-        <p-dropdown [options]="modulos" class="form-control" [(ngModel)]="permissao.modulo" name="modulo" required></p-dropdown>
+        <p-dropdown [options]="tipos" class="form-control" [(ngModel)]="tarefaTemplate.tipo" name="tipo" required></p-dropdown>
         <!-- <app-message error="required" text="Módulo é obrigatório"></app-message> -->
 
       </div>
 
-      <div class="ui-g-12 ui-md-12 ui-lg-4 ui-fluid">
-        <label class="label-form">Nível para acesso</label>
+      <div class="ui-g">
+        <label class="label-form">Período de validade</label>
+        <!-- <p-multiSelect [options]="meses" [(ngModel)]="selectMeses" optionLabel="name" class="form-control" [panelStyle]="{minWidth:'12em'}"></p-multiSelect> -->
 
-        <p-dropdown [options]="niveis" class="form-control" [(ngModel)]="permissao.nivel" name="nivel" required></p-dropdown>
-        <!-- <app-message error="required" text="Nível é obrigatório"></app-message> -->
+        <p-multiSelect [options]="meses" [(ngModel)]="selectMeses" class="form-control" [panelStyle]="{minWidth:'10em'}">
+          <ng-template let-mes pTemplate="item">
+            <div style="font-size:14px;float:right;margin-top:4px">{{mes.label}}</div>
+          </ng-template>
+        </p-multiSelect>
 
       </div>
 
@@ -43,7 +47,7 @@
 
   <div class="ui-g-12">
     <div class="divisor">
-      <label>Permissões cadastradas</label>
+      <label>Tarefas cadastradas</label>
       <hr>
     </div>
   </div>
@@ -51,16 +55,16 @@
   <div class="ui-g-12 ui-md-12 ui-lg-8 ui-fluid">
     <label class="label-form">Pesquisar por descrição</label>
 
-    <input pInputText type="text" name="pesquisa" [(ngModel)]="pesquisa.descricao" #pesquisa="ngModel" required class="form-control">
+    <input pInputText type="text" #pesquisa="ngModel" [(ngModel)]="pesquisa.descricao" name="pesquisa" class="form-control">
 
   </div>
   <div class="ui-g ui-g-12">
-    <button pButton type="submit" label="Pesquisar" class="btn btn-secondary"></button>
+    <button pButton type="submit" label="Pesquisar" class="btn btn-info"></button>
   </div>
 
   <div class="ui-g-12">
 
-    <p-table [columns]="colunas" [value]="permissoes" dataKey="codigo">
+    <p-table [columns]="colunas" [value]="tarefas" dataKey="codigo">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th style="width: 3em" *ngFor="let col of columns">

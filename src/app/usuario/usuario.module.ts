@@ -9,7 +9,7 @@ import { TableModule } from 'primeng/table';
 
 import { SharedModule } from '../shared/shared.module';
 import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
-import { UsuarioRoutingModule } from './usuario-routing-module';
+import { UsuarioRoutingModule } from './usuario-routing.module';
 
 
 @NgModule({
