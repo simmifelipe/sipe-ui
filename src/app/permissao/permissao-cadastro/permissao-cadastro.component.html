@@ -1,0 +1,84 @@
+<div class="section-body contain-lg">
+
+  <div>
+    <h1>Cadastro de permissões</h1>
+  </div>
+
+  <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
+
+    <div class="ui-g formulario">
+
+      <div class="ui-g-12 ui-md-12 ui-lg-10 ui-fluid">
+        <label class="label-form">Descrição da permissão</label>
+
+        <input pInputText type="text" name="descricao" [(ngModel)]="permissao.descricao" #descricao="ngModel" required
+          minlength="5" class="form-control">
+        <app-message [control]="descricao" error="required" text="Descrição é obrigatória"></app-message>
+        <app-message [control]="descricao" error="minlength" text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+        <label class="label-form">Módulo</label>
+
+        <p-dropdown [options]="modulos" class="form-control" required></p-dropdown>
+        <!-- <app-message [control]="modulos" error="required" text="Módulo é obrigatório"></app-message> -->
+
+      </div>
+
+      <div class="ui-g-12 ui-md-12 ui-lg-4 ui-fluid">
+        <label class="label-form">Nível para acesso</label>
+
+        <p-dropdown [options]="niveis" class="form-control" required></p-dropdown>
+        <!-- <app-message [control]="niveis" error="required" text="Nível é obrigatório"></app-message> -->
+
+      </div>
+
+      <div class="ui-g ui-g-12">
+        <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="ui-g-12">
+    <div class="divisor">
+      <label>Permissões cadastradas</label>
+      <hr>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-8 ui-fluid">
+    <label class="label-form">Pesquisar por descrição</label>
+
+    <input pInputText type="text" name="pesquisa" [(ngModel)]="pesquisa.descricao" #pesquisa="ngModel" required class="form-control">
+
+  </div>
+  <div class="ui-g ui-g-12">
+    <button pButton type="submit" label="Pesquisar" class="btn btn-secondary"></button>
+  </div>
+
+  <div class="ui-g-12">
+
+    <p-table [columns]="colunas" [value]="permissoes" dataKey="codigo">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 3em" *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td *ngFor="let col of columns">
+            {{rowData[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+
+      </ng-template>
+    </p-table>
+  </div>
+
+</div>
