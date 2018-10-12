@@ -27,7 +27,7 @@ export class ErrorHandlerService {
     } else if (errorResponse instanceof HttpErrorResponse) {
 
       msg = errorResponse.error[0].mensagemUsuario;
-      console.log(errorResponse)
+      console.log(errorResponse);
 
     } else if (errorResponse instanceof Response
       && errorResponse.status >= 400 && errorResponse.status <= 499) {

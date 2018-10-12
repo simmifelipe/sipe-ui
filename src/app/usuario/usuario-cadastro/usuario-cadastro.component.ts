@@ -1,3 +1,4 @@
+import { EmpresaService } from './../../empresa/empresa.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -19,34 +20,7 @@ export class UsuarioCadastroComponent implements OnInit {
 
   colunas: any[];
   niveis: SelectItem[];
-  empresas = [
-    {
-      codigo: 1, nome: 'Empresa de teste 1', cpfCnpj: '01.002.003/0001-02',
-      modulo: 1, nivel: null, chave: 11
-    },
-    {
-      codigo: 1, nome: 'Empresa de teste 1', cpfCnpj: '01.002.003/0001-02',
-      modulo: 2, nivel: null, chave: 12
-    },
-    {
-      codigo: 2, nome: 'Empresa de teste 2', cpfCnpj: '01.002.003/0002-05',
-      modulo: 1, nivel: null, chave: 21
-    },
-    {
-      codigo: 2, nome: 'Empresa de teste 2', cpfCnpj: '01.002.003/0002-05',
-      modulo: 2, nivel: null, chave: 22
-    },
-    {
-      codigo: 3, nome: 'Empresa de teste 3', cpfCnpj: '01.002.003/0003-07',
-      modulo: 1, nivel: null, chave: 31
-    },
-    {
-      codigo: 3, nome: 'Empresa de teste 3', cpfCnpj: '01.002.003/0003-07',
-      modulo: 2, nivel: null, chave: 32
-    },
-  ];
-
-
+  empresas = [];
   usuario: Usuario = new Usuario();
 
   constructor(
@@ -55,7 +29,8 @@ export class UsuarioCadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private title: Title,
-    private errorHandler: ErrorHandlerService) {
+    private errorHandler: ErrorHandlerService,
+    private empresaService: EmpresaService) {
 
     this.niveis = [
       { label: 'Selecione...', value: null },
@@ -75,7 +50,6 @@ export class UsuarioCadastroComponent implements OnInit {
       { field: 'modulo', header: 'Módulo' },
       { field: 'nivel', header: 'Níveis de acesso' },
     ];
-
 
     this.title.setTitle('Sipe - Usuario');
 

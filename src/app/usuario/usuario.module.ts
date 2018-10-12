@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 import { SharedModule } from '../shared/shared.module';
 import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
@@ -21,6 +22,7 @@ import { UsuarioRoutingModule } from './usuario-routing-module';
     ButtonModule,
     TableModule,
     DropdownModule,
+    KeyFilterModule,
 
     UsuarioRoutingModule,
     SharedModule

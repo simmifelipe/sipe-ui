@@ -22,4 +22,10 @@ export class EmpresaService {
     return this.http.get<Empresa>(`${this.empresasUrl}/${codigo}`)
       .toPromise();
   }
+
+  listar(): Promise<Empresa[]> {
+    return this.http.get<Empresa[]>(this.empresasUrl)
+      .toPromise();
+  }
+
 }

@@ -4,7 +4,6 @@ import { SipeHttp } from '../seguranca/sipe-http';
 import { Usuario } from './../shared/model/usuario.model';
 
 
-
 @Injectable()
 export class UsuarioService {
 
@@ -15,10 +14,9 @@ export class UsuarioService {
   }
 
   adicionar(usuario: Usuario): Promise<Usuario> {
-    return this.http.post<Usuario>(this.usuariosUrl, JSON.stringify(usuario))
+    return this.http.post<Usuario>(this.usuariosUrl, usuario)
       .toPromise();
   }
-
 
   buscarPorCodigo(codigo: number): Promise<Usuario> {
     return this.http.get<Usuario>(`${this.usuariosUrl}/${codigo}`)
