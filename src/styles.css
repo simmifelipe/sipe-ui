@@ -147,3 +147,7 @@ body .ui-chkbox-label {
     color: var(--cor-primaria-texto);
 }
 /* FIM - MESSAGES */
+
+.ui-helper-reset {
+    background-color: white;
+}

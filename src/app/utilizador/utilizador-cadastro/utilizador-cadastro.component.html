@@ -27,7 +27,7 @@
         <label class="label-form">CPF/CNPJ</label>
 
         <input pInputText type="text" required class="form-control" name="cpfCnpj" [(ngModel)]="utilizador.cpfCnpj"
-          #cpfCnpj="ngModel" (blur)="utilizador.cpfCnpj = formataDocumento(utilizador.cpfCnpj)">
+          #cpfCnpj="ngModel" (blur)="utilizador.cpfCnpj = formatDocService.format(utilizador.cpfCnpj)">
         <app-message [control]="cpfCnpj" error="required" text="CPF/CNPJ é obrigatório"></app-message>
 
       </div>
@@ -96,12 +96,11 @@
 
         <p-autoComplete required class="form-control" [minLength]="3" [(ngModel)]="utilizador.cidade" field="nome"
           [suggestions]="cidadesFiltradas" (completeMethod)="buscarCidades($event)" name="cidade" [forceSelection]="true"
-          #cid="ngModel">
+          #cid="ngModel" required>
           <ng-template let-cid pTemplate="utilizador.cidade">
             <span style="font-size:18px">{{cid.nome + ' - ' + cid.estado}}</span>
           </ng-template>
         </p-autoComplete>
-
         <app-message [control]="cid" error="required" text="Cidade é obrigatória"></app-message>
       </div>
 

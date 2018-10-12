@@ -8,7 +8,7 @@ export class Empresa {
     cnpj: number;
     inscricaoMunicipal: number;
     ie: number;
-    ativo: boolean = true;
+    ativo = true;
     endereco: Endereco = new Endereco();
     utilizador: Utilizador = new Utilizador();
 
