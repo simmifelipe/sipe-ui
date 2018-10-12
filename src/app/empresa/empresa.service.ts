@@ -1,8 +1,8 @@
 
-import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Empresa } from '../shared/model/empresa.model';
 import { SipeHttp } from '../seguranca/sipe-http';
+import { Empresa } from '../shared/model/empresa.model';
+import { environment } from './../../environments/environment';
 
 @Injectable()
 export class EmpresaService {
@@ -15,6 +15,11 @@ export class EmpresaService {
 
   adicionar(empresa: Empresa): Promise<Empresa> {
     return this.http.post<Empresa>(this.empresasUrl, empresa)
+      .toPromise();
+  }
+
+  buscarPorCodigo(codigo: number): Promise<Empresa> {
+    return this.http.get<Empresa>(`${this.empresasUrl}/${codigo}`)
       .toPromise();
   }
 }

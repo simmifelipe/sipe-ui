@@ -26,7 +26,8 @@
       <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
         <label class="label-form">CNPJ</label>
 
-        <input pInputText type="text" required class="form-control" name="cnpj" [(ngModel)]="empresa.cnpj" #cnpj="ngModel">
+        <input pInputText type="text" required class="form-control" name="cnpj" [(ngModel)]="empresa.cnpj" #cnpj="ngModel"
+          (blur)="empresa.cnpj = formatDocService.format(empresa.cnpj)">
         <app-message [control]="cnpj" error="required" text="CNPJ é obrigatório"></app-message>
 
       </div>
@@ -87,6 +88,7 @@
     </div>
     <div class="ui-g btn-container">
       <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
+      <button pButton type="button" label="Novo" class="btn btn-primary" (click)="novo(formulario)"></button>
       <a pButton label="Pesquisa" class="btn btn-warning"></a>
     </div>
 

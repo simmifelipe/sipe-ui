@@ -17,7 +17,7 @@ export class UtilizadorService {
     this.utilizadoresUrl = `${environment.apiUrl}/utilizadores`;
   }
 
-  adicionar(utilizador: Utilizador): Promise<Utilizador> { 
+  adicionar(utilizador: Utilizador): Promise<Utilizador> {
     return this.http.post<Utilizador>(this.utilizadoresUrl, utilizador)
       .toPromise();
   }

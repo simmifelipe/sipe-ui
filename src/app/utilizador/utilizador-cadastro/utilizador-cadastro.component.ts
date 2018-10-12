@@ -1,4 +1,3 @@
-import { FormatDocService } from './../../shared/format-doc.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -8,6 +7,7 @@ import { CidadeService } from '../../cidade/cidade.service';
 import { Utilizador } from '../../shared/model/utilizador.model';
 import { UtilizadorService } from '../utilizador.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
+import { FormatDocService } from './../../shared/format-doc.service';
 
 @Component({
   selector: 'app-utilizador-cadastro',
@@ -48,7 +48,9 @@ export class UtilizadorCadastroComponent implements OnInit {
   }
 
   salvar() {
-    this.removeMascara();
+    if (this.utilizador && this.utilizador.cpfCnpj) {
+      this.utilizador.cpfCnpj = this.formatDocService.unFormat(this.utilizador.cpfCnpj);
+    }
     this.utilizadorService.adicionar(this.utilizador)
       .then(utilizadorAdicionado => {
 
@@ -76,18 +78,4 @@ export class UtilizadorCadastroComponent implements OnInit {
 
     this.router.navigate(['/utilizadores/novo']);
   }
-
-  formataDocumento(valor: any) {
-    return this.formatDocService.format(valor);
-  }
-
-  removeMascara(){
-    if (this.utilizador) {
-      if (this.utilizador.cpfCnpj) {
-        this.utilizador.cpfCnpj = this.formatDocService.unFormat(this.utilizador.cpfCnpj);
-      }
-    }
-  }
-
-
 }
