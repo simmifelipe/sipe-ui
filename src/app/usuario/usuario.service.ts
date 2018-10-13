@@ -10,7 +10,7 @@ export class UsuarioService {
   usuariosUrl: string;
 
   constructor(private http: SipeHttp) {
-    this.usuariosUrl = `${environment}/usuarios`;
+    this.usuariosUrl = `${environment.apiUrl}/usuarios`;
   }
 
   adicionar(usuario: Usuario): Promise<Usuario> {

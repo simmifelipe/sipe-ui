@@ -1,15 +1,16 @@
-import { EmpresaService } from './../../empresa/empresa.service';
+import { Empresa } from './../../shared/model/empresa.model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
-
-import { SelectItem } from 'primeng/components/common/selectitem';
-
-import { ErrorHandlerService } from '../../core/error-handler.service';
-import { Usuario } from './../../shared/model/usuario.model';
-import { UsuarioService } from '../usuario.service';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastaService } from 'ngx-toasta';
+import { SelectItem } from 'primeng/components/common/selectitem';
+import { ErrorHandlerService } from '../../core/error-handler.service';
+import { UsuarioService } from '../usuario.service';
+import { EmpresaService } from './../../empresa/empresa.service';
+import { Usuario } from './../../shared/model/usuario.model';
+
+
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -20,7 +21,7 @@ export class UsuarioCadastroComponent implements OnInit {
 
   colunas: any[];
   niveis: SelectItem[];
-  empresas = [];
+  empresas: Empresa[] = [];
   usuario: Usuario = new Usuario();
 
   constructor(
@@ -46,7 +47,7 @@ export class UsuarioCadastroComponent implements OnInit {
     this.colunas = [
       { field: 'codigo', header: 'Código' },
       { field: 'nome', header: 'Nome' },
-      { field: 'cpfCnpj', header: 'CPF/CNPJ' },
+      { field: 'cnpj', header: 'CPF/CNPJ' },
       { field: 'modulo', header: 'Módulo' },
       { field: 'nivel', header: 'Níveis de acesso' },
     ];
@@ -57,6 +58,8 @@ export class UsuarioCadastroComponent implements OnInit {
     if (codigoUsuario) {
       this.carregarUsuario(codigoUsuario);
     }
+
+    this.carregarEmpresas();
   }
 
   carregarUsuario(codigo: number) {
@@ -66,6 +69,9 @@ export class UsuarioCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
+
+    this.usuario.utilizador.codigo = 1; // Alterar para o utilizador logado
+
     this.usuarioService.adicionar(this.usuario)
       .then(usuarioAdicionado => {
 
@@ -83,6 +89,15 @@ export class UsuarioCadastroComponent implements OnInit {
     }.bind(this), 1);
 
     this.router.navigate(['/usuarios/novo']);
+  }
+
+
+  carregarEmpresas() {
+
+    this.empresaService.listar()
+      .then(emprs => this.empresas = emprs)
+      .catch(erro => this.errorHandler.handle(erro));
+
   }
 
 
