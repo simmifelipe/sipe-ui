@@ -1,4 +1,3 @@
-import { Empresa } from './../../shared/model/empresa.model';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -8,6 +7,8 @@ import { SelectItem } from 'primeng/components/common/selectitem';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { UsuarioService } from '../usuario.service';
 import { EmpresaService } from './../../empresa/empresa.service';
+import { AuthenticationService } from './../../seguranca/authentication.service';
+import { Empresa } from './../../shared/model/empresa.model';
 import { Usuario } from './../../shared/model/usuario.model';
 
 
@@ -31,7 +32,8 @@ export class UsuarioCadastroComponent implements OnInit {
     private router: Router,
     private title: Title,
     private errorHandler: ErrorHandlerService,
-    private empresaService: EmpresaService) {
+    private empresaService: EmpresaService,
+    private auth: AuthenticationService) {
 
     this.niveis = [
       { label: 'Selecione...', value: null },
@@ -48,7 +50,6 @@ export class UsuarioCadastroComponent implements OnInit {
       { field: 'codigo', header: 'Código' },
       { field: 'nome', header: 'Nome' },
       { field: 'cnpj', header: 'CPF/CNPJ' },
-      { field: 'modulo', header: 'Módulo' },
       { field: 'nivel', header: 'Níveis de acesso' },
     ];
 
@@ -91,13 +92,10 @@ export class UsuarioCadastroComponent implements OnInit {
     this.router.navigate(['/usuarios/novo']);
   }
 
-
   carregarEmpresas() {
-
-    this.empresaService.listar()
+    this.empresaService.buscarPorUtilizador(this.auth.jwtPayload.utilizador)
       .then(emprs => this.empresas = emprs)
       .catch(erro => this.errorHandler.handle(erro));
-
   }
 
 

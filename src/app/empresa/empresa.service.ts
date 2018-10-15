@@ -1,8 +1,8 @@
-
 import { Injectable } from '@angular/core';
 import { SipeHttp } from '../seguranca/sipe-http';
 import { Empresa } from '../shared/model/empresa.model';
 import { environment } from './../../environments/environment';
+
 
 @Injectable()
 export class EmpresaService {
@@ -23,8 +23,8 @@ export class EmpresaService {
       .toPromise();
   }
 
-  listar(): Promise<Empresa[]> {
-    return this.http.get<Empresa[]>(this.empresasUrl)
+  buscarPorUtilizador(codigo: number): Promise<Empresa[]> {
+    return this.http.get<Empresa[]>(`${this.empresasUrl}/utilizador/${codigo}`)
       .toPromise();
   }
 
