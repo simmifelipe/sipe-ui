@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { TableModule } from 'primeng/table';
 
 
 import { SharedModule } from '../shared/shared.module';
@@ -20,6 +21,7 @@ import { UtilizadorRoutingModule } from './utilizador-routing.module';
     CommonModule,
     FormsModule,
 
+    TableModule,
     AutoCompleteModule,
     InputTextareaModule,
     CheckboxModule,

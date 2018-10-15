@@ -25,6 +25,10 @@ textarea {
     resize: none;
 }
 
+th {
+    background: #F4F4F4;
+}
+
 .divisor{
     margin-top: 20px;
 }

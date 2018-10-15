@@ -10,7 +10,7 @@ export class ModuloService {
   modulosUrl: string;
 
   constructor(private http: SipeHttp) {
-    this.modulosUrl = `${environment}/modulos`;
+    this.modulosUrl = `${environment.apiUrl}/modulos`;
   }
 
   adicionar(modulo: Modulo): Promise<Modulo> {
@@ -21,6 +21,11 @@ export class ModuloService {
 
   buscarPorCodigo(codigo: number): Promise<Modulo> {
     return this.http.get<Modulo>(`${this.modulosUrl}/${codigo}`)
+      .toPromise();
+  }
+
+  listar(): Promise<Modulo[]> {
+    return this.http.get<Modulo[]>(this.modulosUrl)
       .toPromise();
   }
 

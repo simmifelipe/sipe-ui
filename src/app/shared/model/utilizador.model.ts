@@ -1,5 +1,7 @@
+import { Empresa } from './empresa.model';
 import { Cidade } from './cidade.model';
 import { Endereco } from './endereco.model';
+import { Modulo } from './modulo.model';
 
 export class Utilizador {
 
@@ -13,5 +15,7 @@ export class Utilizador {
     ativo = true;
     endereco: Endereco = new Endereco();
     cidade: Cidade = new Cidade();
+    modulos: Modulo[] = [];
+    empresas: Empresa[] = []
 
 }

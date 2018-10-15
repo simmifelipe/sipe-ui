@@ -61,6 +61,7 @@ export class UsuarioCadastroComponent implements OnInit {
     }
 
     this.carregarEmpresas();
+    
   }
 
   carregarUsuario(codigo: number) {
@@ -70,8 +71,7 @@ export class UsuarioCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
-
-    this.usuario.utilizador.codigo = 1; // Alterar para o utilizador logado
+    this.usuario.utilizador.codigo = this.auth.jwtPayload.utilizador;
 
     this.usuarioService.adicionar(this.usuario)
       .then(usuarioAdicionado => {
@@ -97,6 +97,5 @@ export class UsuarioCadastroComponent implements OnInit {
       .then(emprs => this.empresas = emprs)
       .catch(erro => this.errorHandler.handle(erro));
   }
-
 
 }

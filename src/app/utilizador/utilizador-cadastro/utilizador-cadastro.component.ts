@@ -1,3 +1,4 @@
+import { Modulo } from './../../shared/model/modulo.model';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -8,6 +9,7 @@ import { Utilizador } from '../../shared/model/utilizador.model';
 import { UtilizadorService } from '../utilizador.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { FormatDocService } from './../../shared/format-doc.service';
+import { ModuloService } from 'src/app/modulo/modulo.service';
 
 @Component({
   selector: 'app-utilizador-cadastro',
@@ -19,6 +21,8 @@ export class UtilizadorCadastroComponent implements OnInit {
   utilizador: Utilizador = new Utilizador();
   cidadesFiltradas: any[];
   cidadeSelecionada: any;
+  modulos: Modulo[] = [];
+  colunas: any[] = [];
 
 
   constructor(
@@ -29,7 +33,8 @@ export class UtilizadorCadastroComponent implements OnInit {
     private router: Router,
     private title: Title,
     private errorHandler: ErrorHandlerService,
-    private formatDocService: FormatDocService) { }
+    private formatDocService: FormatDocService,
+    private moduloService: ModuloService) { }
 
   ngOnInit() {
 
@@ -39,6 +44,12 @@ export class UtilizadorCadastroComponent implements OnInit {
     if (codigoUtilizador) {
       this.carregarUtilizador(codigoUtilizador);
     }
+
+    this.colunas = [
+      { field: 'codigo', header: 'Código' },
+      { field: 'descricao', header: 'Descrição' }
+    ];
+    this.carregarModulos();
   }
 
   carregarUtilizador(codigo: number) {
@@ -77,5 +88,11 @@ export class UtilizadorCadastroComponent implements OnInit {
     }.bind(this), 1);
 
     this.router.navigate(['/utilizadores/novo']);
+  }
+
+  carregarModulos() {
+    this.moduloService.listar()
+      .then(mds => this.modulos = mds)
+      .catch(erro => this.errorHandler.handle(erro));
   }
 }

@@ -111,6 +111,32 @@
         <label class="label-form">Observações</label>
         <textarea [rows]="2" class="form-control" pInputTextarea name="observacoes" [(ngModel)]="utilizador.endereco.observacoes"></textarea>
       </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <p-table [columns]="colunas" [value]="modulos" [(selection)]="utilizador.modulos" dataKey="codigo">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th style="width: 3em">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th *ngFor="let col of columns">
+                {{ col.header }}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <td>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+              </td>
+              <td *ngFor="let col of columns">
+                {{ rowData[col.field] }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
     </div>
     <div class="ui-g btn-container">
       <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
