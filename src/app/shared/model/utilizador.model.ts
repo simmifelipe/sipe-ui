@@ -16,6 +16,5 @@ export class Utilizador {
     endereco: Endereco = new Endereco();
     cidade: Cidade = new Cidade();
     modulos: Modulo[] = [];
-    empresas: Empresa[] = []
 
 }

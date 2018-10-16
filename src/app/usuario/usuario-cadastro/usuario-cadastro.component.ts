@@ -61,7 +61,6 @@ export class UsuarioCadastroComponent implements OnInit {
     }
 
     this.carregarEmpresas();
-    
   }
 
   carregarUsuario(codigo: number) {
