@@ -8,8 +8,11 @@ import { ErrorHandlerService } from '../../core/error-handler.service';
 import { UsuarioService } from '../usuario.service';
 import { EmpresaService } from './../../empresa/empresa.service';
 import { AuthenticationService } from './../../seguranca/authentication.service';
+import { EmpresaUsuario } from './../../shared/model/empresa-usuario.model';
 import { Empresa } from './../../shared/model/empresa.model';
+import { Modulo } from './../../shared/model/modulo.model';
 import { Usuario } from './../../shared/model/usuario.model';
+import { UtilizadorService } from './../../utilizador/utilizador.service';
 
 
 
@@ -24,6 +27,9 @@ export class UsuarioCadastroComponent implements OnInit {
   niveis: SelectItem[];
   empresas: Empresa[] = [];
   usuario: Usuario = new Usuario();
+  empresasUsuario: EmpresaUsuario[] = [];
+  empresasUsuarioSelecionadas: EmpresaUsuario[] = [];
+
 
   constructor(
     private usuarioService: UsuarioService,
@@ -33,7 +39,8 @@ export class UsuarioCadastroComponent implements OnInit {
     private title: Title,
     private errorHandler: ErrorHandlerService,
     private empresaService: EmpresaService,
-    private auth: AuthenticationService) {
+    private auth: AuthenticationService,
+    private utilizadorService: UtilizadorService) {
 
     this.niveis = [
       { label: 'Selecione...', value: null },
@@ -47,10 +54,10 @@ export class UsuarioCadastroComponent implements OnInit {
   ngOnInit() {
 
     this.colunas = [
-      { field: 'codigo', header: 'Código' },
-      { field: 'nome', header: 'Nome' },
-      { field: 'cnpj', header: 'CPF/CNPJ' },
-      { field: 'nivel', header: 'Níveis de acesso' },
+      { field: 'empresa.nome', header: 'Nome' },
+      { field: 'empresa.cnpj', header: 'CPF/CNPJ' },
+      { field: 'modulo.descricao', header: 'Módulo' },
+      { field: 'nivel', header: 'Nível de acesso' },
     ];
 
     this.title.setTitle('Sipe - Usuario');
@@ -61,6 +68,7 @@ export class UsuarioCadastroComponent implements OnInit {
     }
 
     this.carregarEmpresas();
+    this.carregarEmpresasUsuario();
   }
 
   carregarUsuario(codigo: number) {
@@ -95,6 +103,29 @@ export class UsuarioCadastroComponent implements OnInit {
     this.empresaService.buscarPorUtilizador(this.auth.jwtPayload.utilizador)
       .then(emprs => this.empresas = emprs)
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarEmpresasUsuario() {
+
+    this.empresasUsuario = [];
+    let modulos: Modulo[] = [];
+    this.utilizadorService.buscarPorCodigo(this.auth.jwtPayload.utilizador)
+      .then(utilizador => {
+        modulos = utilizador.modulos;
+
+        let codigo = 1;
+        this.empresas.forEach(emp => {
+          modulos.forEach(mod => {
+            this.empresasUsuario.push(new EmpresaUsuario(codigo, emp.nome, mod.descricao, null));
+            codigo++;
+          });
+        });
+
+        console.log(this.empresasUsuario);
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+
+
   }
 
 }
