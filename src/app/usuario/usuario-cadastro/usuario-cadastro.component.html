@@ -69,12 +69,10 @@
               <td>
                 <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
               </td>
-              <td *ngFor="let col of columns; last as isLast">
-                {{ rowData[col.field] }}
-                <span *ngIf="isLast">
-                  <p-dropdown [options]="niveis"></p-dropdown>
-                </span>
-              </td>
+              <td>{{rowData.empresa.nome}}</td>
+              <td>{{rowData.empresa.cnpj}}</td>
+              <td>{{rowData.modulo.descricao}}</td>
+              <td><p-dropdown [options]="niveis"></p-dropdown></td>
             </tr>
           </ng-template>
 

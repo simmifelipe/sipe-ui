@@ -1,3 +1,4 @@
+import { ParticipanteModule } from './../participante/participante.module';
 import { TarefaTemplateModule } from './../tarefa-template/tarefa-template.module';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +31,7 @@ import { PermissaoService } from '../permissao/permissao.service';
 import { PermissaoModule } from '../permissao/permissao.module';
 import { FormatDocService } from '../shared/format-doc.service';
 import { TarefaTemplateService } from '../tarefa-template/tarefa-template.service';
+import { ParticipanteService } from '../participante/participante.service';
 
 
 registerLocaleData(localePt);
@@ -47,7 +49,8 @@ registerLocaleData(localePt);
     UsuarioModule,
     ModuloModule,
     PermissaoModule,
-    TarefaTemplateModule
+    TarefaTemplateModule,
+    ParticipanteModule
   ],
   declarations: [
     NavbarComponent,
@@ -61,6 +64,7 @@ registerLocaleData(localePt);
     ToastaModule
   ],
   providers: [
+    ParticipanteService,
     UsuarioService,
     UtilizadorService,
     CidadeService,

@@ -10,7 +10,7 @@ export class PermissaoService {
   permissoesUrl: string;
 
   constructor(private http: SipeHttp) {
-    this.permissoesUrl = `${environment}/permissoes`;
+    this.permissoesUrl = `${environment.apiUrl}/permissoes`;
   }
 
   adicionar(permissao: Permissao): Promise<Permissao> {

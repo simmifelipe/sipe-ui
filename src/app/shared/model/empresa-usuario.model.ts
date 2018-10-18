@@ -4,14 +4,14 @@ import { Empresa } from "./empresa.model";
 export class EmpresaUsuario {
 
     codigo: number;
-    empresa: string;
-    modulo: string;
+    empresa: Empresa;
+    modulo: Modulo;
     nivel: number;
 
     constructor(
         codigo: number,
-        empresa: string,
-        modulo: string,
+        empresa: Empresa,
+        modulo: Modulo,
         nivel: number
     ) {
         this.codigo = codigo;

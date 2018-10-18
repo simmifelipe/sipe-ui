@@ -1,0 +1,137 @@
+<div class="section-body contain-lg">
+
+  <div>
+    <h1>Novo Participante</h1>
+  </div>
+
+  <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
+
+    <div class="divisor">
+      <label>Preencha as informações</label>
+      <hr>
+    </div>
+
+    <div class="ui-g formulario">
+
+      <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+        <label class="label-form">Nome</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="participante.nome" #nome="ngModel" required minlength="5"
+          class="form-control">
+        <app-message [control]="nome" error="required" text="Nome é obrigatório"></app-message>
+        <app-message [control]="nome" error="minlength" text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+        <label class="label-form">Nome</label>
+        <input pInputText type="text" name="nomeFantasia" [(ngModel)]="participante.nomeFantasia" #nome="ngModel" class="form-control">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">CPF/CNPJ</label>
+        <input pInputText type="text" required class="form-control" name="cpfCnpj" [(ngModel)]="participante.cpf_cnpj"
+          #cpfCnpj="ngModel" (blur)="participante.cpf_cnpj = formatDocService.format(participante.cpf_cnpj)" pKeyFilter="int">
+        <app-message [control]="cpfCnpj" error="required" text="CPF/CNPJ é obrigatório"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">Inscr. Estadual</label>
+        <input pInputText type="text" class="form-control" name="ie" [(ngModel)]="participante.inscricaoEstadual"
+          pKeyFilter="int">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">Inscr. Municipal</label>
+        <input pInputText type="text" class="form-control" name="inscricaoMunicipal" [(ngModel)]="participante.inscricaoMunicipal"
+          pKeyFilter="int">
+      </div>
+
+      <div class="ui-g-6 ui-md-6 ui-lg-4 ui-fluid">
+        <label class="label-form">Contato</label>
+        <input pInputText type="text" class="form-control" name="contato" [(ngModel)]="participante.contato">
+      </div>
+
+      <div class="ui-g-6 ui-md-6 ui-lg-4 ui-fluid">
+        <label class="label-form">Telefone</label>
+        <input pInputText type="text" class="form-control" name="telefone" [(ngModel)]="participante.telefone">
+      </div>
+
+      
+
+
+
+      <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
+        <label class="label-form">Situação</label>
+        <div class="ui-g-12">
+          <p-checkbox label="Ativo" binary=true name="ativo" [(ngModel)]="participante.ativo"></p-checkbox>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+      <div class="ui-g-12">
+        <div class="divisor">
+          <label>Informações de endereço</label>
+          <hr>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label class="label-form">Logradouro</label>
+
+        <input pInputText type="text" required min="5" class="form-control" name="logradouro" [(ngModel)]="participante.endereco.logradouro"
+          #logradouro="ngModel">
+        <app-message [control]="logradouro" error="required" text="Logradouro é obrigatório"></app-message>
+        <app-message [control]="logradouro" error="minlength" text="Mínimo de {{ logradouro.errors?.minlength?.requiredLength }} caracteres"></app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label class="label-form">Bairro</label>
+        <input pInputText type="text" class="form-control" name="bairro" [(ngModel)]="participante.endereco.bairro">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label class="label-form">CEP</label>
+        <input pInputText type="text" class="form-control" name="cep" [(ngModel)]="participante.endereco.cep"
+          pKeyFilter="int">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label class="label-form">Número</label>
+        <input pInputText type="text" class="form-control" name="numero" [(ngModel)]="participante.endereco.numero">
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label class="label-form">Cidade</label>
+
+        <p-autoComplete required class="form-control" [minLength]="3" [(ngModel)]="participante.cidade" field="nome"
+          [suggestions]="cidadesFiltradas" (completeMethod)="buscarCidades($event)" name="cidade" [forceSelection]="true"
+          #cid="ngModel" required>
+          <ng-template let-cid pTemplate="participante.cidade">
+            <span style="font-size:18px">{{cid.nome + ' - ' + cid.estado}}</span>
+          </ng-template>
+        </p-autoComplete>
+        <app-message [control]="cid" error="required" text="Cidade é obrigatória"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label class="label-form">Observações</label>
+        <textarea [rows]="2" class="form-control" pInputTextarea name="observacoes" [(ngModel)]="participante.endereco.observacoes"></textarea>
+      </div>
+
+    </div>
+    <div class="ui-g btn-container">
+      <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
+      <button pButton type="button" label="Novo" class="btn btn-primary" (click)="novo(formulario)"></button>
+      <a pButton label="Pesquisa" class="btn btn-warning"></a>
+    </div>
+
+  </form>
+</div>

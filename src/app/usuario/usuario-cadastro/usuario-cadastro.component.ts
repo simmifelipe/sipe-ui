@@ -54,10 +54,10 @@ export class UsuarioCadastroComponent implements OnInit {
   ngOnInit() {
 
     this.colunas = [
-      { field: 'empresa.nome', header: 'Nome' },
-      { field: 'empresa.cnpj', header: 'CPF/CNPJ' },
-      { field: 'modulo.descricao', header: 'Módulo' },
-      { field: 'nivel', header: 'Nível de acesso' },
+      { campo: 'empresa', header: 'Nome' },
+      { campo: 'empresa', header: 'CPF/CNPJ' },
+      { campo: 'modulo', header: 'Módulo' },
+      { campo: 'nivel', header: 'Nível de acesso' },
     ];
 
     this.title.setTitle('Sipe - Usuario');
@@ -116,16 +116,13 @@ export class UsuarioCadastroComponent implements OnInit {
         let codigo = 1;
         this.empresas.forEach(emp => {
           modulos.forEach(mod => {
-            this.empresasUsuario.push(new EmpresaUsuario(codigo, emp.nome, mod.descricao, null));
+            let empUser = new EmpresaUsuario(codigo, emp, mod, null);
+            this.empresasUsuario.push(empUser);
             codigo++;
           });
         });
-
-        console.log(this.empresasUsuario);
       })
       .catch(erro => this.errorHandler.handle(erro));
-
-
   }
 
 }

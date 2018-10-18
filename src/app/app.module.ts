@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
+import { ParticipanteCadastroComponent } from './participante/participante-cadastro/participante-cadastro.component';
 
 
 @NgModule({
