@@ -21,7 +21,7 @@ export class LoginFormComponent implements OnInit {
   login(usuario: string, senha: string) {
     this.authService.login(usuario, senha)
       .then(() => {
-        this.router.navigate(['/utilizadores']);
+        this.router.navigate(['/empresa-selecao']);
       })
       .catch(erro => {
         this.errorHandler.handle(erro);

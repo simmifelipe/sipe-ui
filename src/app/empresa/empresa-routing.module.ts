@@ -1,3 +1,4 @@
+import { EmpresaSelecaoComponent } from './empresa-selecao/empresa-selecao.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './../seguranca/auth.guard';
@@ -8,6 +9,8 @@ const routes: Routes = [
     { path: 'empresas', component: EmpresaCadastroComponent, canActivate: [AuthGuard] },
     { path: 'empresas/novo', component: EmpresaCadastroComponent, canActivate: [AuthGuard] },
     { path: 'empresas/:codigo', component: EmpresaCadastroComponent, canActivate: [AuthGuard] },
+    { path: 'empresas/:codigo', component: EmpresaCadastroComponent, canActivate: [AuthGuard] },
+    { path: 'empresa-selecao', component: EmpresaSelecaoComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

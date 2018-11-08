@@ -1,0 +1,15 @@
+
+.ui-dialog-content-empresa {
+    text-align: center;
+    max-height: 400px;
+}
+
+.ui-dialog .ui-dialog-content {
+    max-height: 400px !important;
+}
+
+.card-empresa {
+    height: 100px; 
+    max-height: 300px;
+    margin: 8px;
+}

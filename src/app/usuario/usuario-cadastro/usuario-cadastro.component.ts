@@ -116,7 +116,7 @@ export class UsuarioCadastroComponent implements OnInit {
         let codigo = 1;
         this.empresas.forEach(emp => {
           modulos.forEach(mod => {
-            let empUser = new EmpresaUsuario(codigo, emp, mod, null);
+            const empUser = new EmpresaUsuario(codigo, emp, mod, null);
             this.empresasUsuario.push(empUser);
             codigo++;
           });

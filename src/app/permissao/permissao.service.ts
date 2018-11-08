@@ -18,7 +18,6 @@ export class PermissaoService {
       .toPromise();
   }
 
-
   buscarPorCodigo(codigo: number): Promise<Permissao> {
     return this.http.get<Permissao>(`${this.permissoesUrl}/${codigo}`)
       .toPromise();

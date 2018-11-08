@@ -6,10 +6,12 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
 
 import { SharedModule } from '../shared/shared.module';
 import { EmpresaRoutingModule } from './empresa-routing.module';
 import { EmpresaCadastroComponent } from './empresa-cadastro/empresa-cadastro.component';
+import { EmpresaSelecaoComponent } from './empresa-selecao/empresa-selecao.component';
 
 @NgModule({
   imports: [
@@ -20,13 +22,14 @@ import { EmpresaCadastroComponent } from './empresa-cadastro/empresa-cadastro.co
     CheckboxModule,
     InputTextareaModule,
     KeyFilterModule,
-
+    DialogModule,
 
     SharedModule,
     EmpresaRoutingModule
   ],
   declarations: [
-    EmpresaCadastroComponent
+    EmpresaCadastroComponent,
+    EmpresaSelecaoComponent
   ],
   exports: []
 })
