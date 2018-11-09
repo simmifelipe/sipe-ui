@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../seguranca/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -24,7 +25,8 @@ export class EmpresaCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private formatDocService: FormatDocService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private auth: AuthenticationService) { }
 
   ngOnInit() {
     this.title.setTitle('Sipe - Empresa');
@@ -40,7 +42,7 @@ export class EmpresaCadastroComponent implements OnInit {
     if (this.empresa && this.empresa.cnpj) {
       this.empresa.cnpj = this.formatDocService.unFormat(this.empresa.cnpj);
     }
-    this.empresa.utilizador.codigo = 2; // TODO: Alterar para utilizador logado.
+    this.empresa.utilizador.codigo = this.auth.jwtPayload.utilizador;
     this.empresaService.adicionar(this.empresa)
       .then(empresaAdicionada => {
 
