@@ -1,3 +1,4 @@
+import { TableModule } from 'primeng/table';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +24,7 @@ import { EmpresaSelecaoComponent } from './empresa-selecao/empresa-selecao.compo
     InputTextareaModule,
     KeyFilterModule,
     DialogModule,
+    TableModule,
 
     SharedModule,
     EmpresaRoutingModule

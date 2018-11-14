@@ -23,5 +23,10 @@ export class PermissaoService {
       .toPromise();
   }
 
+  buscarPorModuloENivel(modulo: number, nivel: number): Promise<Permissao[]>{
+    return this.http.get<Permissao[]>(`${this.permissoesUrl}/${modulo}/${nivel}`)
+      .toPromise();
+  }
+
 
 }

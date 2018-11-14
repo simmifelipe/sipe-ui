@@ -1,9 +1,11 @@
-import { ErrorHandlerService } from './../../core/error-handler.service';
-import { AuthenticationService } from './../../seguranca/authentication.service';
-import { Liberacao } from './../../shared/model/liberacao.model';
-import { LiberacaoService } from './../../permissao/liberacao.service';
 import { Component, OnInit } from '@angular/core';
 import { Permissao } from 'src/app/shared/model/permissao.model';
+import { ErrorHandlerService } from './../../core/error-handler.service';
+import { LiberacaoService } from './../../permissao/liberacao.service';
+import { PermissaoService } from './../../permissao/permissao.service';
+import { AuthenticationService } from './../../seguranca/authentication.service';
+import { Empresa } from './../../shared/model/empresa.model';
+import { Liberacao } from './../../shared/model/liberacao.model';
 
 @Component({
   selector: 'app-empresa-selecao',
@@ -14,17 +16,27 @@ export class EmpresaSelecaoComponent implements OnInit {
 
   display = true;
   liberacoes: Liberacao[] = [];
+  empresas: Empresa[] = [];
   todasLiberacoes: Liberacao[] = [];
   resultadoLiberacoes: Liberacao[] = [];
   permissoes: Permissao[] = [];
+  colunas: any[] = [];
+  empresaSelecionada: Empresa;
+  habilitado = false;
 
   constructor(
     private liberacaoService: LiberacaoService,
     private auth: AuthenticationService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private permissaoService: PermissaoService
   ) { }
 
   ngOnInit() {
+
+    this.colunas = [
+      { field: 'nome', header: 'Selecione uma das empresas abaixo' }
+    ];
+
     this.carregarEmpresas();
   }
 
@@ -35,6 +47,7 @@ export class EmpresaSelecaoComponent implements OnInit {
         lbrcs.forEach(lb => {
           if (this.liberacoes.length === 0) {
             this.liberacoes.push(lb);
+            this.empresas.push(lb.liberacaoPK.empresaModulo.empresa);
           }
           for (let index = 0; index < this.liberacoes.length; index++) {
             const liberacao = this.liberacoes[index];
@@ -44,6 +57,7 @@ export class EmpresaSelecaoComponent implements OnInit {
             }
             if ((this.liberacoes.length - 1) === index) {
               this.liberacoes.push(lb);
+              this.empresas.push(lb.liberacaoPK.empresaModulo.empresa);
             }
           }
         });
@@ -52,28 +66,30 @@ export class EmpresaSelecaoComponent implements OnInit {
   }
 
   selecionarEmpresa(empresa: number) {
-    const resultadoLiberacoes = [];
+    this.resultadoLiberacoes = [];
+    this.habilitado = this.habilitado ? false : true;
     for (let index = 0; index < this.todasLiberacoes.length; index++) {
       const lb = this.todasLiberacoes[index];
       if (lb.liberacaoPK.empresaModulo.empresa.codigo === empresa) {
-        resultadoLiberacoes.push(lb);
+        this.resultadoLiberacoes.push(lb);
       }
     }
   }
 
-
   carregarPermissoes() {
+    console.log(this.resultadoLiberacoes);
     for (let index = 0; index < this.resultadoLiberacoes.length; index++) {
       const lb = this.resultadoLiberacoes[index];
-
-
-
+      this.buscarPermissoes(lb.liberacaoPK.empresaModulo.modulo.codigo, lb.nivel);
     }
   }
 
-
-  private buscarPermissoes(modulo: number, nivel: number): Permissao[] {
-
+  private buscarPermissoes(modulo: number, nivel: number): any {
+    return this.permissaoService.buscarPorModuloENivel(modulo, nivel)
+      .then(prms => {
+        console.log(prms);
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 }
