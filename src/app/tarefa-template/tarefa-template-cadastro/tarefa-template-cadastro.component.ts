@@ -74,8 +74,8 @@ export class TarefaTemplateCadastroComponent implements OnInit {
     this.tarefaTemplateService.adicionar(this.tarefaTemplate)
       .then(tarefaTemplateAdicionada => {
 
-        this.toastaService.success('Permissão salva com sucesso!');
-        this.router.navigate(['/permissoes', tarefaTemplateAdicionada.codigo]);
+        this.toastaService.success('Tarefa salva com sucesso!');
+        this.router.navigate(['/tarefa-template', tarefaTemplateAdicionada.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

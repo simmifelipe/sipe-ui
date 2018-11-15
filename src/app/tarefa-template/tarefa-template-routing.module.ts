@@ -6,17 +6,17 @@ import { TarefaTemplateCadastroComponent } from './tarefa-template-cadastro/tare
 
 const routes: Routes = [
     {
-        path: 'tarefatemplate',
+        path: 'tarefa-template',
         component: TarefaTemplateCadastroComponent,
         canActivate: [AuthGuard]
     },
     {
-        path: 'tarefatemplate/novo',
+        path: 'tarefa-template/novo',
         component: TarefaTemplateCadastroComponent,
         canActivate: [AuthGuard]
     },
     {
-        path: 'tarefatemplate/:codigo',
+        path: 'tarefa-template/:codigo',
         component: TarefaTemplateCadastroComponent,
         canActivate: [AuthGuard]
     }
