@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -14,7 +15,8 @@ export class AuthenticationService {
 
     constructor(
         private http: HttpClient,
-        private jwtHelper: JwtHelperService
+        private jwtHelper: JwtHelperService,
+        private cookieService: CookieService
     ) {
         this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
         this.carregarToken();
@@ -80,7 +82,8 @@ export class AuthenticationService {
     }
 
     temPermissao(permissao: string) {
-        return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+        // return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+        return this.recuperaPermissoes().includes(permissao);
     }
 
     temQualquerPermissao(roles) {
@@ -90,6 +93,20 @@ export class AuthenticationService {
             }
         }
         return false;
+    }
+
+    limparPermissoes() {
+        this.cookieService.delete('permissoes');
+    }
+
+    private recuperaPermissoes() {
+        if (this.cookieService.check('permissoes')) {
+            let permissoesString = atob(this.cookieService.get('permissoes'));
+            if (permissoesString) {
+                return permissoesString.split(';');
+            }
+        }
+        return [];
     }
 
     private armazenarToken(token: string) {

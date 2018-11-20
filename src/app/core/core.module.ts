@@ -1,3 +1,4 @@
+import { DashboardModule } from './../dashboard/dashboard.module';
 import { ParticipanteModule } from './../participante/participante.module';
 import { TarefaTemplateModule } from './../tarefa-template/tarefa-template.module';
 import { CommonModule, registerLocaleData } from '@angular/common';
@@ -9,6 +10,7 @@ import localePt from '@angular/common/locales/pt';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastaModule } from 'ngx-toasta';
+import { CookieService } from 'ngx-cookie-service';
 
 
 import { CidadeService } from './../cidade/cidade.service';
@@ -50,7 +52,8 @@ registerLocaleData(localePt);
     ModuloModule,
     PermissaoModule,
     TarefaTemplateModule,
-    ParticipanteModule
+    ParticipanteModule,
+    DashboardModule
   ],
   declarations: [
     NavbarComponent,
@@ -79,6 +82,7 @@ registerLocaleData(localePt);
 
     JwtHelperService,
     Title,
+    CookieService,
     { provide: LOCALE_ID, useValue: 'pt' }
   ]
 })

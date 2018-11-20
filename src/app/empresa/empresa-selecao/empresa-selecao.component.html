@@ -15,13 +15,13 @@
         <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr [pSelectableRow]="rowData">
             <td *ngFor="let col of columns" (click)="selecionarEmpresa(rowData.codigo)">
-              {{rowData[col.field]}}
+              <a href="javascript:void(0);" style="text-decoration: none;">{{rowData[col.field]}}</a>
             </td>
           </tr>
         </ng-template>
       </p-table>
       <button pButton type="button" label="Confirmar" style="margin-top:10px" class="btn btn-primary" [disabled]="!empresaSelecionada"
-        (click)="carregarPermissoes()"></button>
+        (click)="confirmarPermissoes()"></button>
     </div>
   </p-dialog>
 

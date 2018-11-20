@@ -8,17 +8,29 @@ const routes: Routes = [
     {
         path: 'utilizadores',
         component: UtilizadorCadastroComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data:
+        {
+            roles: ['ROLE_CADASTRAR_UTILIZADOR', 'ROLE_LISTAR_UTILIZADOR']
+        }
     },
     {
         path: 'utilizadores/novo',
         component: UtilizadorCadastroComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data:
+        {
+            roles: ['ROLE_CADASTRAR_UTILIZADOR']
+        }
     },
     {
         path: 'utilizadores/:codigo',
         component: UtilizadorCadastroComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data:
+        {
+            roles: ['ROLE_CADASTRAR_UTILIZADOR', 'ROLE_LISTAR_UTILIZADOR']
+        }
     }
 ];
 

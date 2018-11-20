@@ -1,3 +1,4 @@
+import { Permissao } from './permissao.model';
 import { Utilizador } from './utilizador.model';
 
 export class Usuario {
@@ -7,5 +8,6 @@ export class Usuario {
     email: string;
     senha: string;
     ativo = true;
+    permissoes: Permissao[] = [];
     utilizador: Utilizador = new Utilizador();
 }

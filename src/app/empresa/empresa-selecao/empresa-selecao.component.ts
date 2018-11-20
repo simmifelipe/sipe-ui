@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Permissao } from 'src/app/shared/model/permissao.model';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { LiberacaoService } from './../../permissao/liberacao.service';
@@ -19,7 +21,7 @@ export class EmpresaSelecaoComponent implements OnInit {
   empresas: Empresa[] = [];
   todasLiberacoes: Liberacao[] = [];
   resultadoLiberacoes: Liberacao[] = [];
-  permissoes: Permissao[] = [];
+  permissoes: any = [];
   colunas: any[] = [];
   empresaSelecionada: Empresa;
   habilitado = false;
@@ -28,7 +30,9 @@ export class EmpresaSelecaoComponent implements OnInit {
     private liberacaoService: LiberacaoService,
     private auth: AuthenticationService,
     private errorHandler: ErrorHandlerService,
-    private permissaoService: PermissaoService
+    private permissaoService: PermissaoService,
+    private cookieService: CookieService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -74,22 +78,43 @@ export class EmpresaSelecaoComponent implements OnInit {
         this.resultadoLiberacoes.push(lb);
       }
     }
+    this.carregarPermissoes();
   }
 
-  carregarPermissoes() {
-    console.log(this.resultadoLiberacoes);
+  confirmarPermissoes() {
+    let permissoesString = btoa(this.montarStringPermissoes(this.permissoes));
+    this.cookieService.set('permissoes', permissoesString);
+
+    if (this.cookieService.get('permissoes').length > 5) {
+      this.router.navigate(['/']);
+    }
+  }
+
+  private carregarPermissoes() {
     for (let index = 0; index < this.resultadoLiberacoes.length; index++) {
       const lb = this.resultadoLiberacoes[index];
       this.buscarPermissoes(lb.liberacaoPK.empresaModulo.modulo.codigo, lb.nivel);
     }
   }
 
-  private buscarPermissoes(modulo: number, nivel: number): any {
+  private buscarPermissoes(modulo: number, nivel: number) {
     return this.permissaoService.buscarPorModuloENivel(modulo, nivel)
       .then(prms => {
-        console.log(prms);
+        for (let index = 0; index < prms.length; index++) {
+          this.permissoes.push(prms[index]);
+        }
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  private montarStringPermissoes(permissoes: Permissao[]): string {
+    let retorno = '';
+    for (let index = 0; index < this.permissoes.length; index++) {
+      const permissao = this.permissoes[index];
+      console.log(permissao.descricao);
+      retorno += permissao.descricao + ';';
+    }
+    return retorno;
   }
 
 }

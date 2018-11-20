@@ -1,5 +1,7 @@
+import { AuthenticationService } from './../../seguranca/authentication.service';
+import { CookieService } from 'ngx-cookie-service';
 import { Modulo } from './../../shared/model/modulo.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,6 +25,7 @@ export class UtilizadorCadastroComponent implements OnInit {
   cidadeSelecionada: any;
   modulos: Modulo[] = [];
   colunas: any[] = [];
+  loaded = false;
 
 
   constructor(
@@ -34,7 +37,8 @@ export class UtilizadorCadastroComponent implements OnInit {
     private title: Title,
     private errorHandler: ErrorHandlerService,
     private formatDocService: FormatDocService,
-    private moduloService: ModuloService) { }
+    private moduloService: ModuloService,
+    private auth: AuthenticationService) { }
 
   ngOnInit() {
 
@@ -51,6 +55,7 @@ export class UtilizadorCadastroComponent implements OnInit {
     ];
     this.carregarModulos();
   }
+
 
   carregarUtilizador(codigo: number) {
     this.utilizadorService.buscarPorCodigo(codigo)

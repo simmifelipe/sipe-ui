@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.logoutService.logout()
       .then(() => {
+        this.auth.limparPermissoes();
         this.router.navigate(['/login']);
       })
       .catch(error => this.errorHandler.handle(error));
