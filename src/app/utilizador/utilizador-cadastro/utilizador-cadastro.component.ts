@@ -64,9 +64,6 @@ export class UtilizadorCadastroComponent implements OnInit {
   }
 
   salvar() {
-    if (this.utilizador && this.utilizador.cpfCnpj) {
-      this.utilizador.cpfCnpj = this.formatDocService.unFormat(this.utilizador.cpfCnpj);
-    }
     this.utilizadorService.adicionar(this.utilizador)
       .then(utilizadorAdicionado => {
 

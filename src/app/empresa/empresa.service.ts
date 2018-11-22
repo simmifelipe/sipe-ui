@@ -1,9 +1,8 @@
-import { Utilizador } from './../shared/model/utilizador.model';
+
 import { Injectable } from '@angular/core';
 import { SipeHttp } from '../seguranca/sipe-http';
 import { Empresa } from '../shared/model/empresa.model';
 import { environment } from './../../environments/environment';
-import { Permissao } from '../shared/model/permissao.model';
 
 
 @Injectable()
