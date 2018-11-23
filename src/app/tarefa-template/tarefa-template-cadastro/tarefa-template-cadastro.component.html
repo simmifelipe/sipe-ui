@@ -18,40 +18,40 @@
 
       </div>
 
-      <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-lg-6 ui-fluid">
         <label class="label-form">Tipo de tarefa</label>
 
         <p-dropdown [options]="tipos" class="form-control" [(ngModel)]="tarefaTemplate.tipo"
-        name="tipoTarefa" required></p-dropdown>
+        name="tipoTarefa"></p-dropdown>
         <!-- <app-message error="required" text="Selecione o tipo de tarefa"></app-message> -->
 
       </div>
 
-      <div class="ui-g">
+      <div class="ui-g-12 ui-md-6 ui-lg-6">
         <label class="label-form">Período de validade</label>
-        <p-multiSelect [options]="meses" [(ngModel)]="selectMeses" class="form-control" [panelStyle]="{minWidth:'10em'}"
-           name="periodoValidade">
+        <p-multiSelect [options]="meses" [(ngModel)]="selectMeses" class="form-control"
+        [panelStyle]="{minWidth:'15em'}" name="periodoValidade" defaultLabel="Selecione..."
+        showToggleAll="true" selectedItemsLabel = "{} meses selecionados">
           <ng-template let-mes pTemplate="item">
             <div style="font-size:14px;float:right;margin-top:4px">{{mes.label}}</div>
           </ng-template>
         </p-multiSelect>
       </div>
 
-      <!-- <div class="ui-g-12 ui-md-6 ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-fluid">
         <label class="label-form">Cidade</label>
 
-        <p-autoComplete required class="form-control" [minLength]="3" [(ngModel)]="utilizador.cidade" field="nome"
+        <p-autoComplete required class="form-control" [minLength]="3" [(ngModel)]="tarefaTemplate.cidade" field="nome"
           [suggestions]="cidadesFiltradas" (completeMethod)="buscarCidades($event)" name="cidade" [forceSelection]="true"
-          #cid="ngModel" required>
+          #cid="ngModel">
           <ng-template let-cid pTemplate="utilizador.cidade">
             <span style="font-size:18px">{{cid.nome + ' - ' + cid.estado}}</span>
           </ng-template>
         </p-autoComplete>
-        <app-message [control]="cid" error="required" text="Cidade é obrigatória"></app-message>
-      </div> -->
+      </div>
 
       <div class="ui-g ui-g-12">
-        <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
+        <button pButton type="button" [disabled]="formulario.invalid ? 'disabled' : ''" class="btn btn-primary">Salvar</button>
       </div>
     </div>
 
@@ -71,7 +71,7 @@
 
   </div>
   <div class="ui-g ui-g-12">
-    <button pButton type="submit" label="Pesquisar" class="btn btn-info"></button>
+    <button pButton type="button" class="btn btn-info">Pesquisar</button>
   </div>
 
   <div class="ui-g-12">
