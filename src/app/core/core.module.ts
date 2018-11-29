@@ -1,3 +1,5 @@
+import { PlanoMidiaService } from './../plano-midia/plano-midia.service';
+import { PlanoMidiaModule } from './../plano-midia/plano-midia.module';
 import { DashboardModule } from './../dashboard/dashboard.module';
 import { ParticipanteModule } from './../participante/participante.module';
 import { TarefaTemplateModule } from './../tarefa-template/tarefa-template.module';
@@ -53,6 +55,7 @@ registerLocaleData(localePt);
     UsuarioModule,
     ModuloModule,
     PermissaoModule,
+    PlanoMidiaModule,
     TarefaTemplateModule,
     ParticipanteModule,
     DashboardModule,
@@ -77,6 +80,7 @@ registerLocaleData(localePt);
     EmpresaService,
     ModuloService,
     PermissaoService,
+    PlanoMidiaService,
     TarefaTemplateService,
     TipoParticipanteService,
     ErrorHandlerService,

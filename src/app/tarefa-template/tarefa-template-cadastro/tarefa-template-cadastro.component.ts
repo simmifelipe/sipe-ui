@@ -1,3 +1,4 @@
+import { CidadeService } from './../../cidade/cidade.service';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,15 +20,16 @@ import { TarefaTemplateService } from './../tarefa-template.service';
 export class TarefaTemplateCadastroComponent implements OnInit {
 
   colunas: any[];
-
+  cidadesFiltradas: any[];
+  cidadeSelecionada: any;
   meses: SelectItem[];
-
   selectMeses: any[] = [];
-
+  tipos: any[];
   tarefaTemplate: TarefaTemplate = new TarefaTemplate();
 
   constructor(
     private tarefaTemplateService: TarefaTemplateService,
+    private cidadeService: CidadeService,
     private toastaService: ToastaService,
     private route: ActivatedRoute,
     private router: Router,
@@ -88,6 +90,15 @@ export class TarefaTemplateCadastroComponent implements OnInit {
     }.bind(this), 1);
 
     this.router.navigate(['/tarefastemplate/novo']);
+  }
+
+  buscarCidades(event) {
+    const texto = event.query;
+    this.cidadeService.pesquisarPorNome(texto)
+      .then(cidades => {
+        this.cidadesFiltradas = cidades;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 }
