@@ -11,7 +11,7 @@ export class ParticipanteService {
   participantesUrl: string;
 
   constructor(private http: SipeHttp) {
-    this.participantesUrl = `${environment.apiUrl}/permissoes`;
+    this.participantesUrl = `${environment.apiUrl}/participantes`;
   }
 
   adicionar(participante: Participante): Promise<Participante> {

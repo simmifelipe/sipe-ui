@@ -15,10 +15,10 @@ export class Participante {
     email: string;
     observacoes: string;
     ativo: boolean = true;
-    utilizador: Utilizador = new Utilizador();
-    endereco: Endereco = new Endereco();
-    cidade: Cidade = new Cidade();
-    tipoPessoa: TipoPessoa;
+    utilizador = new Utilizador();
+    endereco = new Endereco();
+    cidade = new Cidade();
+    tipoPessoa: string;
 
 
 }

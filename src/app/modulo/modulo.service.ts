@@ -14,7 +14,7 @@ export class ModuloService {
   }
 
   adicionar(modulo: Modulo): Promise<Modulo> {
-    return this.http.post<Modulo>(this.modulosUrl, JSON.stringify(modulo))
+    return this.http.post<Modulo>(this.modulosUrl, modulo)
       .toPromise();
   }
 
@@ -24,9 +24,8 @@ export class ModuloService {
       .toPromise();
   }
 
-  listar(): Promise<Modulo[]> {
-    return this.http.get<Modulo[]>(this.modulosUrl)
-      .toPromise();
+  listar() {
+    return this.http.get<Modulo[]>(this.modulosUrl);
   }
 
 }

@@ -1,12 +1,14 @@
-import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { ToastaService } from 'ngx-toasta';
+import { Observable } from 'rxjs/Observable';
 import { ErrorHandlerService } from './../../core/error-handler.service';
-import { ModuloService } from './../modulo.service';
 import { Modulo } from './../../shared/model/modulo.model';
+import { ModuloService } from './../modulo.service';
+
+
 
 @Component({
   selector: 'app-modulo-cadastro',
@@ -16,10 +18,7 @@ import { Modulo } from './../../shared/model/modulo.model';
 export class ModuloCadastroComponent implements OnInit {
 
   colunas: any[];
-  modulos = [
-    { codigo: 1, descricao: 'Módulo de Eventos' },
-    { codigo: 2, descricao: 'Módulo Financeiro' },
-  ];
+  modulos$: Observable<Modulo[]>;
 
   modulo: Modulo = new Modulo();
 
@@ -47,6 +46,8 @@ export class ModuloCadastroComponent implements OnInit {
     if (codigoModulo) {
       this.carregarModulo(codigoModulo);
     }
+
+    this.listar();
   }
 
   carregarModulo(codigo: number) {
@@ -63,6 +64,10 @@ export class ModuloCadastroComponent implements OnInit {
         this.router.navigate(['/modulos', moduloAdicionado.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  listar(){
+    this.modulos$ = this.moduloService.listar();
   }
 
   novo(form: FormControl) {

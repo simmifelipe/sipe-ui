@@ -1,8 +1,8 @@
+import { CidadeService } from './../../cidade/cidade.service';
 import { ParticipanteService } from './../participante.service';
 import { AuthenticationService } from './../../seguranca/authentication.service';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormatDocService } from './../../shared/format-doc.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { Title } from '@angular/platform-browser';
 import { ToastaService } from 'ngx-toasta';
@@ -17,13 +17,14 @@ import { Participante } from 'src/app/shared/model/participante.model';
 export class ParticipanteCadastroComponent implements OnInit {
 
   participante = new Participante();
+  cidadesFiltradas: any[];
 
   constructor(
     private participanteService: ParticipanteService,
     private toastaService: ToastaService,
     private title: Title,
     private errorHandler: ErrorHandlerService,
-    private formatDocService: FormatDocService,
+    private cidadeService: CidadeService,
     private route: ActivatedRoute,
     private router: Router,
     private auth: AuthenticationService) { }
@@ -39,10 +40,11 @@ export class ParticipanteCadastroComponent implements OnInit {
 
   salvar(form: FormControl) {
 
-    if (this.participante && this.participante.cpf_cnpj) {
-      this.participante.cpf_cnpj = this.formatDocService.unFormat(this.participante.cpf_cnpj);
-    }
     this.participante.utilizador.codigo = this.auth.jwtPayload.utilizador;
+    this.participante.tipoPessoa = TipoPessoa.FISICA.toString();
+    
+    
+    console.log(this.participante);
     this.participanteService.adicionar(this.participante)
       .then(participanteAdicionado => {
 
@@ -51,6 +53,16 @@ export class ParticipanteCadastroComponent implements OnInit {
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
+
+  buscarCidades(event) {
+    const texto = event.query;
+    this.cidadeService.pesquisarPorNome(texto)
+      .then(cidades => {
+        this.cidadesFiltradas = cidades;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
 
   carregarParticipante(codigo: number) {
     this.participanteService.buscarPorCodigo(codigo)

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmpresaService } from '../empresa/empresa.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private empresaService: EmpresaService) { }
 
   ngOnInit() {
+
+    this.empresaService.buscarPorCodigo(1);
   }
 
 }

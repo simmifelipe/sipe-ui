@@ -38,10 +38,6 @@ export class EmpresaCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
-
-    if (this.empresa && this.empresa.cnpj) {
-      this.empresa.cnpj = this.formatDocService.unFormat(this.empresa.cnpj);
-    }
     this.empresa.utilizador.codigo = this.auth.jwtPayload.utilizador;
     this.empresaService.adicionar(this.empresa)
       .then(empresaAdicionada => {
