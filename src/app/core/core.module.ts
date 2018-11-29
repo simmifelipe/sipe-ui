@@ -1,3 +1,5 @@
+import { PlanoMidiaService } from './../plano-midia/plano-midia.service';
+import { PlanoMidiaModule } from './../plano-midia/plano-midia.module';
 import { DashboardModule } from './../dashboard/dashboard.module';
 import { ParticipanteModule } from './../participante/participante.module';
 import { TarefaTemplateModule } from './../tarefa-template/tarefa-template.module';
@@ -34,6 +36,8 @@ import { PermissaoModule } from '../permissao/permissao.module';
 import { FormatDocService } from '../shared/format-doc.service';
 import { TarefaTemplateService } from '../tarefa-template/tarefa-template.service';
 import { ParticipanteService } from '../participante/participante.service';
+import { TipoParticipanteModule } from '../tipo-participante/tipo-participante.module';
+import { TipoParticipanteService } from '../tipo-participante/tipo-participante.service';
 
 
 registerLocaleData(localePt);
@@ -51,9 +55,11 @@ registerLocaleData(localePt);
     UsuarioModule,
     ModuloModule,
     PermissaoModule,
+    PlanoMidiaModule,
     TarefaTemplateModule,
     ParticipanteModule,
-    DashboardModule
+    DashboardModule,
+    TipoParticipanteModule
   ],
   declarations: [
     NavbarComponent,
@@ -74,7 +80,9 @@ registerLocaleData(localePt);
     EmpresaService,
     ModuloService,
     PermissaoService,
+    PlanoMidiaService,
     TarefaTemplateService,
+    TipoParticipanteService,
     ErrorHandlerService,
     AuthenticationService,
     FormatDocService,

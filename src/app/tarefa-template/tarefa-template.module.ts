@@ -1,3 +1,4 @@
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,6 +19,7 @@ import { TableModule } from 'primeng/table';
     TableModule,
     DropdownModule,
     MultiSelectModule,
+    AutoCompleteModule,
 
     TarefaTemplateRoutingModule,
     SharedModule
