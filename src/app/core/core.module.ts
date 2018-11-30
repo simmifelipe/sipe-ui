@@ -38,6 +38,8 @@ import { PermissaoModule } from '../permissao/permissao.module';
 import { FormatDocService } from '../shared/format-doc.service';
 import { TarefaTemplateService } from '../tarefa-template/tarefa-template.service';
 import { ParticipanteService } from '../participante/participante.service';
+import { TipoParticipanteModule } from '../tipo-participante/tipo-participante.module';
+import { TipoParticipanteService } from '../tipo-participante/tipo-participante.service';
 
 
 registerLocaleData(localePt);
@@ -59,7 +61,8 @@ registerLocaleData(localePt);
     TarefaTemplateModule,
     LocalEventoModule,
     ParticipanteModule,
-    DashboardModule
+    DashboardModule,
+    TipoParticipanteModule
   ],
   declarations: [
     NavbarComponent,
@@ -83,6 +86,7 @@ registerLocaleData(localePt);
     PlanoMidiaService,
     TarefaTemplateService,
     LocalEventoService,
+    TipoParticipanteService,
     ErrorHandlerService,
     AuthenticationService,
     FormatDocService,

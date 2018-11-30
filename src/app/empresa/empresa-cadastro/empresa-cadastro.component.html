@@ -1,9 +1,15 @@
 <div class="section-body contain-lg">
 
   <div>
-    <h1>Nova Empresa</h1>
+    <h1>Velha Empresa</h1>
   </div>
-
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+            <input type="text" pInputText placeholder="Testando">         
+        </div>
+    </div>
   <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
 
     <div class="divisor">
@@ -27,7 +33,7 @@
         <label class="label-form">CNPJ</label>
 
         <input pInputText type="text" required class="form-control" name="cnpj" [(ngModel)]="empresa.cnpj" #cnpj="ngModel"
-          (blur)="empresa.cnpj = formatDocService.format(empresa.cnpj)" pKeyFilter="int">
+          pKeyFilter="int">
         <app-message [control]="cnpj" error="required" text="CNPJ é obrigatório"></app-message>
 
       </div>
@@ -83,8 +89,8 @@
       </div>
 
       <div class="ui-g-12 ui-fluid">
-        <label class="label-form">Observações</label>
-        <textarea [rows]="2" class="form-control" pInputTextarea name="observacoes" [(ngModel)]="empresa.endereco.observacoes"></textarea>
+        <label class="label-form">Complemento</label>
+        <textarea [rows]="2" class="form-control" pInputTextarea name="complemento" [(ngModel)]="empresa.endereco.complemento"></textarea>
       </div>
     </div>
     <div class="ui-g btn-container">

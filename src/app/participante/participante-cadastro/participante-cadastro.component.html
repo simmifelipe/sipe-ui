@@ -22,14 +22,14 @@
       </div>
 
       <div class="ui-g-12 ui-md-12 ui-lg-6 ui-fluid">
-        <label class="label-form">Nome</label>
+        <label class="label-form">Nome Fantasia</label>
         <input pInputText type="text" name="nomeFantasia" [(ngModel)]="participante.nomeFantasia" #nome="ngModel" class="form-control">
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
         <label class="label-form">CPF/CNPJ</label>
         <input pInputText type="text" required class="form-control" name="cpfCnpj" [(ngModel)]="participante.cpf_cnpj"
-          #cpfCnpj="ngModel" (blur)="participante.cpf_cnpj = formatDocService.format(participante.cpf_cnpj)" pKeyFilter="int">
+          #cpfCnpj="ngModel" pKeyFilter="int">
         <app-message [control]="cpfCnpj" error="required" text="CPF/CNPJ é obrigatório"></app-message>
       </div>
 
@@ -55,7 +55,7 @@
         <input pInputText type="text" class="form-control" name="telefone" [(ngModel)]="participante.telefone">
       </div>
 
-      
+
 
 
 

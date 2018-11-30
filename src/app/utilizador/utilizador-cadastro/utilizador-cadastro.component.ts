@@ -94,9 +94,6 @@ export class UtilizadorCadastroComponent implements OnInit {
 
   carregarModulos() {
     this.moduloService.listar()
-      .then(mds => {
-        this.modulos = mds;
-      })
-      .catch(erro => this.errorHandler.handle(erro));
+      .subscribe(dados => this.modulos = dados);
   }
 }
