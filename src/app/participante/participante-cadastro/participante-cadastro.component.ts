@@ -41,7 +41,7 @@ export class ParticipanteCadastroComponent implements OnInit {
   salvar(form: FormControl) {
 
     this.participante.utilizador.codigo = this.auth.jwtPayload.utilizador;
-    this.participante.tipoPessoa = TipoPessoa.FISICA.toString();
+    this.participante.tipoPessoa = 'FISICA';
     
     
     console.log(this.participante);

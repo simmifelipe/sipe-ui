@@ -1,3 +1,4 @@
+import { TipoParticipante } from './tipo-participante.model';
 import { Endereco } from './endereco.model';
 import { Utilizador } from './utilizador.model';
 import { Cidade } from './cidade.model';
@@ -7,7 +8,7 @@ export class Participante {
     codigo: number;
     nome: string;
     nomeFantasia: string;
-    cpf_cnpj: number;
+    cpfCnpj: number;
     inscricaoEstadual: number;
     inscricaoMunicipal: number;
     contato: string;
@@ -19,6 +20,7 @@ export class Participante {
     endereco = new Endereco();
     cidade = new Cidade();
     tipoPessoa: string;
+    tiposParticipante: TipoParticipante[] = [];
 
 
 }
