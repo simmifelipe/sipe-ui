@@ -1,3 +1,5 @@
+import { LocalEventoModule } from './../local-evento/local-evento.module';
+import { LocalEventoService } from './../local-evento/local-evento.service';
 import { PlanoMidiaService } from './../plano-midia/plano-midia.service';
 import { PlanoMidiaModule } from './../plano-midia/plano-midia.module';
 import { DashboardModule } from './../dashboard/dashboard.module';
@@ -57,6 +59,7 @@ registerLocaleData(localePt);
     PermissaoModule,
     PlanoMidiaModule,
     TarefaTemplateModule,
+    LocalEventoModule,
     ParticipanteModule,
     DashboardModule,
     TipoParticipanteModule
@@ -82,6 +85,7 @@ registerLocaleData(localePt);
     PermissaoService,
     PlanoMidiaService,
     TarefaTemplateService,
+    LocalEventoService,
     TipoParticipanteService,
     ErrorHandlerService,
     AuthenticationService,

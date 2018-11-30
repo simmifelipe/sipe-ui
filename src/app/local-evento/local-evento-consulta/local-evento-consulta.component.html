@@ -1,0 +1,35 @@
+<div class="section-body contain-lg"></div>
+
+<div class="ui-g-12">
+  <div class="divisor">
+    <label>Consulta locais cadastrados</label>
+    <hr>
+  </div>
+
+</div>
+
+
+<div class="ui-g-12">
+
+  <p-table [columns]="colunas" [value]="modulos" dataKey="codigo">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 3em" *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td *ngFor="let col of columns">
+          {{rowData[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+
+    </ng-template>
+  </p-table>
+</div>
+
+
