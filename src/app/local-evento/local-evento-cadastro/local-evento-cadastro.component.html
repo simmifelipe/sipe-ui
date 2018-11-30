@@ -1,0 +1,66 @@
+<div class="section-body contain-lg">
+
+  <div>
+    <h1>Cadastro de Locais para Eventos</h1>
+  </div>
+
+  <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
+
+    <div class="ui-g formulario">
+
+      <div class="ui-g-12 ui-md-6 ui-lg-2 ui-fluid">
+        <label class="label-form">Código</label>
+        <input pInputText type="number" name="codigo" [(ngModel)]="localEvento.codigo" #codigo="ngModel" required class="form-control">
+        <app-message [control]="codigo" error="required" text="Informe o código"></app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-12 ui-lg-8 ui-fluid">
+        <label class="label-form">Nome do local</label>
+
+        <input pInputText type="text" name="nome" [(ngModel)]="localEvento.nome" #nome="ngModel" required minlength="5"
+          class="form-control">
+        <app-message [control]="nome" error="required" text="Nome é obrigatório"></app-message>
+        <app-message [control]="nome" error="minlength" text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
+
+      </div>
+
+
+      <div class="ui-g-12 ui-md-6 ui-lg-6 ui-fluid">
+        <label class="label-form">Responsável</label>
+
+        <input pInputText type="text" name="responsavel" [(ngModel)]="localEvento.responsavel" #responsavel="ngModel"
+          class="form-control">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label class="label-form">Cidade</label>
+
+        <p-autoComplete required class="form-control" [minLength]="3" [(ngModel)]="localEvento.cidade" field="nome"
+          [suggestions]="cidadesFiltradas" (completeMethod)="buscarCidades($event)" name="cidade" [forceSelection]="true"
+          #cid="ngModel">
+          <ng-template let-cid pTemplate="utilizador.cidade">
+            <span style="font-size:18px">{{cid.nome + ' - ' + cid.estado}}</span>
+          </ng-template>
+        </p-autoComplete>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-lg-4 ui-fluid">
+        <label class="label-form">Telefone</label>
+
+        <input pInputText type="text" name="telefone" [(ngModel)]="localEvento.telefone" #telefone="ngModel" class="form-control">
+      </div>
+
+      <div class="ui-g-12 ui-md-8 ui-lg-8 ui-fluid">
+        <label class="label-form">Observações</label>
+
+        <input pInputText type="text" name="observacoes" [(ngModel)]="localEvento.observacoes" #observacoes="ngModel"
+          class="form-control">
+      </div>
+
+      <div class="ui-g ui-g-12">
+        <button pButton type="button" [disabled]="formulario.invalid ? 'disabled' : ''" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+
+  </form>
