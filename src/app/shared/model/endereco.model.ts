@@ -5,5 +5,5 @@ export class Endereco {
     bairro: string;
     cep: string;
     numero: string;
-    observacoes: string;
+    complemento: string;
 }
