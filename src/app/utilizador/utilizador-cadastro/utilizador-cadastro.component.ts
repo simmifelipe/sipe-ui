@@ -36,7 +36,6 @@ export class UtilizadorCadastroComponent implements OnInit {
     private router: Router,
     private title: Title,
     private errorHandler: ErrorHandlerService,
-    private formatDocService: FormatDocService,
     private moduloService: ModuloService,
     private auth: AuthenticationService) { }
 

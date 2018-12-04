@@ -1,3 +1,4 @@
+import { CidadeService } from './../../cidade/cidade.service';
 import { AuthenticationService } from './../../seguranca/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -5,7 +6,6 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastaService } from 'ngx-toasta';
 import { ErrorHandlerService } from './../../core/error-handler.service';
-import { FormatDocService } from './../../shared/format-doc.service';
 import { Empresa } from './../../shared/model/empresa.model';
 import { EmpresaService } from './../empresa.service';
 
@@ -17,13 +17,15 @@ import { EmpresaService } from './../empresa.service';
 export class EmpresaCadastroComponent implements OnInit {
 
   empresa = new Empresa();
+  cidadesFiltradas: any[];
+  cidadeSelecionada: any;
 
   constructor(
     private empresaService: EmpresaService,
     private toastaService: ToastaService,
     private title: Title,
     private errorHandler: ErrorHandlerService,
-    private formatDocService: FormatDocService,
+    private cidadeService: CidadeService,
     private route: ActivatedRoute,
     private router: Router,
     private auth: AuthenticationService) { }
@@ -62,6 +64,15 @@ export class EmpresaCadastroComponent implements OnInit {
     }.bind(this), 1);
 
     this.router.navigate(['/empresas/novo']);
+  }
+
+  buscarCidades(event) {
+    const texto = event.query;
+    this.cidadeService.pesquisarPorNome(texto)
+      .then(cidades => {
+        this.cidadesFiltradas = cidades;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 }

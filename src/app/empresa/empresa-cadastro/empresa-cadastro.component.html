@@ -1,15 +1,9 @@
 <div class="section-body contain-lg">
 
   <div>
-    <h1>Velha Empresa</h1>
+    <h1>Nova Empresa</h1>
   </div>
-  <div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-4">
-        <div class="ui-inputgroup">
-            <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-            <input type="text" pInputText placeholder="Testando">         
-        </div>
-    </div>
+
   <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
 
     <div class="divisor">
@@ -47,6 +41,16 @@
         <label class="label-form">Inscr. Municipal</label>
         <input pInputText type="text" class="form-control" name="inscricaoMunicipal" [(ngModel)]="empresa.inscricaoMunicipal"
           pKeyFilter="int">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
+        <label class="label-form">Telefone</label>
+        <input pInputText type="text" class="form-control" name="telefone" [(ngModel)]="empresa.telefone" pKeyFilter="int">
+      </div>
+
+      <div class="ui-g-12 ui-md-5 ui-lg-4 ui-fluid">
+        <label class="label-form">E-mail</label>
+        <input pInputText type="text" class="form-control" name="email" [(ngModel)]="empresa.email">
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-lg-2 ui-fluid">
@@ -88,15 +92,29 @@
         <input pInputText type="text" class="form-control" name="numero" [(ngModel)]="empresa.endereco.numero">
       </div>
 
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label class="label-form">Cidade</label>
+
+        <p-autoComplete required class="form-control" [minLength]="3" [(ngModel)]="empresa.cidade" field="nome"
+          [suggestions]="cidadesFiltradas" (completeMethod)="buscarCidades($event)" name="cidade" [forceSelection]="true"
+          #cid="ngModel" required>
+          <ng-template let-cid pTemplate="empresa.cidade">
+            <span style="font-size:18px">{{cid.nome + ' - ' + cid.estado}}</span>
+          </ng-template>
+        </p-autoComplete>
+        <app-message [control]="cid" error="required" text="Cidade é obrigatória"></app-message>
+      </div>
+
       <div class="ui-g-12 ui-fluid">
         <label class="label-form">Complemento</label>
         <textarea [rows]="2" class="form-control" pInputTextarea name="complemento" [(ngModel)]="empresa.endereco.complemento"></textarea>
       </div>
-    </div>
-    <div class="ui-g btn-container">
-      <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
-      <button pButton type="button" label="Novo" class="btn btn-primary" (click)="novo(formulario)"></button>
-      <a pButton label="Pesquisa" class="btn btn-warning"></a>
+
+      <div class="btn-container">
+        <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
+        <button pButton type="button" label="Novo" class="btn btn-primary" (click)="novo(formulario)"></button>
+        <a pButton label="Pesquisa" class="btn btn-warning"></a>
+      </div>
     </div>
 
   </form>

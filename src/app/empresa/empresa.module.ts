@@ -1,3 +1,4 @@
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TableModule } from 'primeng/table';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,6 +26,7 @@ import { EmpresaSelecaoComponent } from './empresa-selecao/empresa-selecao.compo
     KeyFilterModule,
     DialogModule,
     TableModule,
+    AutoCompleteModule,
 
     SharedModule,
     EmpresaRoutingModule
