@@ -66,7 +66,7 @@ export class ModuloCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  listar(){
+  listar() {
     this.modulos$ = this.moduloService.listar();
   }
 

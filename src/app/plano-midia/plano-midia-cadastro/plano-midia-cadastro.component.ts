@@ -31,7 +31,7 @@ export class PlanoMidiaCadastroComponent implements OnInit {
 
     this.colunas = [
       { field: 'codigo', header: 'Código' },
-      { field: 'descricao', header: 'Descrição do módulo' },
+      { field: 'descricao', header: 'Descrição do plano de mídia' },
     ];
 
 

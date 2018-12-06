@@ -1,3 +1,5 @@
+import { SetorIngressoService } from './../setor-ingresso/setor-ingresso.service';
+import { SetorIngressoModule } from './../setor-ingresso/setor-ingresso.module';
 import { LocalEventoModule } from './../local-evento/local-evento.module';
 import { LocalEventoService } from './../local-evento/local-evento.service';
 import { PlanoMidiaService } from './../plano-midia/plano-midia.service';
@@ -58,6 +60,7 @@ registerLocaleData(localePt);
     ModuloModule,
     PermissaoModule,
     PlanoMidiaModule,
+    SetorIngressoModule,
     TarefaTemplateModule,
     LocalEventoModule,
     ParticipanteModule,
@@ -84,6 +87,7 @@ registerLocaleData(localePt);
     ModuloService,
     PermissaoService,
     PlanoMidiaService,
+    SetorIngressoService,
     TarefaTemplateService,
     LocalEventoService,
     TipoParticipanteService,
