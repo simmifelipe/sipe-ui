@@ -64,13 +64,13 @@ export class SetorIngressoCadastroComponent implements OnInit {
       .then(setorIngressoAdicionado => {
 
         this.toastaService.success('Setor cadastrado com sucesso!');
-        this.router.navigate(['/setores-ingresso', setorIngressoAdicionado.codigo]);
+        this.router.navigate(['/setores-ingresso']);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
 
   listar() {
-    this.setorIngresso$ = this.setorIngressoService.listar();
+    this.setorIngresso$ = this.setorIngressoService.listar(this.auth.jwtPayload.utilizador);
   }
 
   novo(form: FormControl) {

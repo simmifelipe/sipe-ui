@@ -48,6 +48,7 @@
           <li *ngIf="auth.temPermissao('ROLE_CADASTRAR_USUARIO')"><a routerLink="/usuarios"><span class="title">Usuário</span></a></li>
           <li *ngIf="auth.temPermissao('ROLE_CADASTRAR_PARTICIPANTE')"><a routerLink="/participantes"><span class="title">Participante</span></a></li>
           <li *ngIf="auth.temPermissao('ROLE_CADASTRAR_MODULO')"><a routerLink="/modulos"><span class="title">Módulos</span></a></li>
+          <li *ngIf="auth.temPermissao('ROLE_CADASTRAR_SETOR_INGRESSO')"><a routerLink="/setores-ingresso"><span class="title">Setor Ingresso</span></a></li>
         </ul>
       </li>
 

@@ -24,8 +24,8 @@ export class SetorIngressoService {
       .toPromise();
   }
 
-  listar() {
-    return this.http.get<SetorIngresso[]>(this.setorIngressoUrl);
+  listar(utilizador: number) {
+    return this.http.get<SetorIngresso[]>(`${this.setorIngressoUrl}/utilizador/${utilizador}`);
   }
 
 }

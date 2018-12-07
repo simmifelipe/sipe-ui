@@ -4,6 +4,6 @@ export class SetorIngresso {
 
     codigo: number;
     descricao: string;
-    ativo: boolean;
+    ativo: boolean = true;
     utilizador: Utilizador = new Utilizador();
 }
