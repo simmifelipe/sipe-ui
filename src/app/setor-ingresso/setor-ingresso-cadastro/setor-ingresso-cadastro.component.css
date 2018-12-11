@@ -1,0 +1,8 @@
+.ui-inputswitch {
+  position: relative;
+  display: table-cell;
+}
+
+body .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
+  background-color: #007ad9;
+}

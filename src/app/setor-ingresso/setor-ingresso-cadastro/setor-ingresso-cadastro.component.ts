@@ -18,9 +18,9 @@ import { SetorIngresso } from './../../shared/model/setor-ingresso.model';
 })
 export class SetorIngressoCadastroComponent implements OnInit {
 
-  colunas: any[];
-  setorIngresso$: Observable<SetorIngresso[]>;
 
+  checked: boolean;
+  setorIngresso$: Observable<SetorIngresso[]>;
   setorIngresso: SetorIngresso = new SetorIngresso();
 
   constructor(
@@ -32,31 +32,26 @@ export class SetorIngressoCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private auth: AuthenticationService) {
 
-  }
-
-  ngOnInit() {
-
-    this.colunas = [
-      { field: 'codigo', header: 'Código' },
-      { field: 'descricao', header: 'Descrição do setor' },
-    ];
-
-
-    this.title.setTitle('Sipe - Setor de ingresso');
-
-    const codigoSetorIngresso = this.route.snapshot.params['codigo'];
-    if (codigoSetorIngresso) {
-      this.carregarSetorIngresso(codigoSetorIngresso);
     }
 
-    this.listar();
-  }
+    ngOnInit() {
 
-  carregarSetorIngresso(codigo: number) {
-    this.setorIngressoService.buscarPorCodigo(codigo)
+      this.title.setTitle('Sipe - Setor de ingresso');
+
+      const codigoSetorIngresso = this.route.snapshot.params['codigo'];
+      if (codigoSetorIngresso) {
+        this.carregarSetorIngresso(codigoSetorIngresso);
+      }
+
+      this.listar();
+    }
+
+
+    carregarSetorIngresso(codigo: number) {
+      this.setorIngressoService.buscarPorCodigo(codigo)
       .then(st => this.setorIngresso = st)
       .catch(erro => this.errorHandler.handle(erro));
-  }
+    }
 
   salvar(form: FormControl) {
     this.setorIngresso.utilizador.codigo = this.auth.jwtPayload.utilizador;
