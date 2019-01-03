@@ -1,7 +1,7 @@
 <div class="section-body contain-lg">
 
   <div>
-    <h1>Cadastro de Setores de Ingresso</h1>
+    <h1>Cadastro de Tipos de Ingresso</h1>
   </div>
 
   <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
@@ -9,9 +9,9 @@
     <div class="ui-g formulario">
 
       <div class="ui-g-12 ui-md-8 ui-lg-8 ui-fluid">
-        <label class="label-form">Descrição do setor</label>
+        <label class="label-form">Descrição do ingresso</label>
 
-        <input pInputText type="text" name="descricao" [(ngModel)]="setorIngresso.descricao" #descricao="ngModel" required
+        <input pInputText type="text" name="descricao" [(ngModel)]="tipoIngresso.descricao" #descricao="ngModel" required
           minlength="3" class="form-control">
         <app-message [control]="descricao" error="required" text="Descrição é obrigatória"></app-message>
         <app-message [control]="descricao" error="minlength" text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message>
@@ -20,7 +20,7 @@
       <div class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid">
         <label class="label-form">Situação</label>
         <div class="ui-g-12">
-          <p-checkbox label="Ativo" binary=true name="ativo" [(ngModel)]="setorIngresso.ativo"></p-checkbox>
+          <p-checkbox label="Ativo" binary=true name="ativo" [(ngModel)]="tipoIngresso.ativo"></p-checkbox>
         </div>
       </div>
 
@@ -34,33 +34,30 @@
 
   <div class="ui-g-12">
     <div class="divisor">
-      <label>Setores cadastrados</label>
+      <label>Tipos de ingresso cadastrados</label>
       <hr>
     </div>
   </div>
 
   <div class="ui-g-12">
 
-    <table class="table table-hover" *ngIf="setorIngresso$ | async as setores; else loading" >
+    <table class="table table-hover" *ngIf="tipoIngresso$ | async as tipos; else loading" >
       <thead>
         <tr>
           <th>ID</th>
           <th>Descrição</th>
-          <th>Ativo</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let setor of setores" >
-          <td>{{ setor.codigo }}</td>
-          <td>{{ setor.descricao }}</td>
-          <td>{{ setor.ativo }}</td>
-          <p-inputSwitch [(ngModel)]="setor.ativo"></p-inputSwitch>
-          </tr>
+        <tr *ngFor="let tipo of tipos" >
+          <td>{{ tipo.codigo }}</td>
+          <td>{{ tipo.descricao }}</td>
+        </tr>
       </tbody>
     </table>
 
     <ng-template #loading>
-      <span>Carregando Setores...</span>
+      <span>Carregando Registros...</span>
     </ng-template>
   </div>
 

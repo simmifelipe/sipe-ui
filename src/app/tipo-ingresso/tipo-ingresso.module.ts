@@ -5,11 +5,10 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
-import {InputSwitchModule} from 'primeng/inputswitch';
 
 import { SharedModule } from './../shared/shared.module';
-import { SetorIngressoCadastroComponent } from './setor-ingresso-cadastro/setor-ingresso-cadastro.component';
-import { SetorIngressoRoutingModule } from './setor-ingresso-routing.module';
+import { TipoIngressoRoutingModule } from './tipo-ingresso-routing.module';
+import { TipoIngressoCadastroComponent } from './tipo-ingresso-cadastro/tipo-ingresso-cadastro.component';
 
 @NgModule({
   imports: [
@@ -19,13 +18,11 @@ import { SetorIngressoRoutingModule } from './setor-ingresso-routing.module';
     CheckboxModule,
     ButtonModule,
     TableModule,
-    InputSwitchModule,
 
-
-    SetorIngressoRoutingModule,
+    TipoIngressoRoutingModule,
     SharedModule
 
   ],
-  declarations: [SetorIngressoCadastroComponent]
+  declarations: [TipoIngressoCadastroComponent]
 })
-export class SetorIngressoModule { }
+export class TipoIngressoModule { }

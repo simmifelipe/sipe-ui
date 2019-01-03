@@ -1,12 +1,3 @@
-import { SetorIngressoService } from './../setor-ingresso/setor-ingresso.service';
-import { SetorIngressoModule } from './../setor-ingresso/setor-ingresso.module';
-import { LocalEventoModule } from './../local-evento/local-evento.module';
-import { LocalEventoService } from './../local-evento/local-evento.service';
-import { PlanoMidiaService } from './../plano-midia/plano-midia.service';
-import { PlanoMidiaModule } from './../plano-midia/plano-midia.module';
-import { DashboardModule } from './../dashboard/dashboard.module';
-import { ParticipanteModule } from './../participante/participante.module';
-import { TarefaTemplateModule } from './../tarefa-template/tarefa-template.module';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -19,7 +10,17 @@ import { ToastaModule } from 'ngx-toasta';
 import { CookieService } from 'ngx-cookie-service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-
+import { TipoIngressoService } from './../tipo-ingresso/tipo-ingresso.service';
+import { SetorIngressoService } from './../setor-ingresso/setor-ingresso.service';
+import { TipoIngressoModule } from './../tipo-ingresso/tipo-ingresso.module';
+import { SetorIngressoModule } from './../setor-ingresso/setor-ingresso.module';
+import { LocalEventoModule } from './../local-evento/local-evento.module';
+import { LocalEventoService } from './../local-evento/local-evento.service';
+import { PlanoMidiaService } from './../plano-midia/plano-midia.service';
+import { PlanoMidiaModule } from './../plano-midia/plano-midia.module';
+import { DashboardModule } from './../dashboard/dashboard.module';
+import { ParticipanteModule } from './../participante/participante.module';
+import { TarefaTemplateModule } from './../tarefa-template/tarefa-template.module';
 import { CidadeService } from './../cidade/cidade.service';
 import { EmpresaService } from './../empresa/empresa.service';
 import { AuthenticationService } from './../seguranca/authentication.service';
@@ -63,6 +64,7 @@ registerLocaleData(localePt);
     PlanoMidiaModule,
     SetorIngressoModule,
     TarefaTemplateModule,
+    TipoIngressoModule,
     LocalEventoModule,
     ParticipanteModule,
     DashboardModule,
@@ -93,6 +95,7 @@ registerLocaleData(localePt);
     SetorIngressoService,
     TarefaTemplateService,
     LocalEventoService,
+    TipoIngressoService,
     TipoParticipanteService,
     ErrorHandlerService,
     AuthenticationService,
