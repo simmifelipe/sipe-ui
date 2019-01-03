@@ -13,9 +13,8 @@ export class UsuarioService {
     this.usuariosUrl = `${environment.apiUrl}/usuarios`;
   }
 
-  adicionar(usuario: Usuario): Promise<Usuario> {
-    return this.http.post<Usuario>(this.usuariosUrl, usuario)
-      .toPromise();
+  adicionar(usuario: Usuario) {
+    return this.http.post<Usuario>(this.usuariosUrl, usuario);
   }
 
   buscarPorCodigo(codigo: number): Promise<Usuario> {

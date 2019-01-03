@@ -4,7 +4,7 @@
     <h1>Novo Usuário</h1>
   </div>
 
-  <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar(formulario)">
+  <form #formulario="ngForm" autocomplete="off" (ngSubmit)="salvar()">
 
     <div class="divisor">
       <label>Preencha as informações</label>
@@ -53,35 +53,57 @@
 
       <div class="ui-g-12">
 
-        <p-table [columns]="colunas" [value]="empresasUsuario" [(selection)]="empresasUsuarioSelecionadas" dataKey="codigo">
-          <ng-template pTemplate="header" let-columns>
-            <tr>
-              <th style="width: 3em">
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-              </th>
-              <th *ngFor="let col of columns">
-                {{ col.header }}
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr [pSelectableRow]="rowData">
-              <td>
-                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
-              </td>
-              <td>{{rowData.empresa.nome}}</td>
-              <td>{{rowData.empresa.cnpj}}</td>
-              <td>{{rowData.modulo.descricao}}</td>
-              <td><p-dropdown [options]="niveis"></p-dropdown></td>
-            </tr>
-          </ng-template>
+        <mat-table #table [dataSource]="dataSource">
 
-        </p-table>
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="col_empresa_nome">
+            <mat-header-cell *matHeaderCellDef> Empresa </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.empresa.nome}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="col_empresa_cnpj">
+            <mat-header-cell *matHeaderCellDef> Cnpj </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.empresa.cnpj}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="col_modulo">
+            <mat-header-cell *matHeaderCellDef> Módulo </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.modulo.descricao}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="col_niveis">
+            <mat-header-cell *matHeaderCellDef> Nível </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-select style="min-width: 200px;" placeholder="Selecione" [value]="element.nivel" (selectionChange)="selecionar($event, element)">
+                <mat-option *ngFor="let niv of niveis" value="{{ niv.codigo }}">
+                  {{ niv.label }}
+                </mat-option>
+              </mat-select>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+        </mat-table>
+
+
 
         <div class="ui-g ui-g-12">
           <button pButton type="submit" [disabled]="formulario.invalid ? 'disabled' : ''" label="Salvar" class="btn btn-primary"></button>
           <button pButton type="button" label="Novo" class="btn btn-primary" (click)="novo(formulario)"></button>
-          <a pButton label="Pesquisa" class="btn btn-warning"></a>
+          <a pButton label="Pesquisa" class="btn btn-warning" (click)="show()"></a>
         </div>
 
       </div>

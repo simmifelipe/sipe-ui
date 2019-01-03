@@ -17,6 +17,7 @@ import localePt from '@angular/common/locales/pt';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastaModule } from 'ngx-toasta';
 import { CookieService } from 'ngx-cookie-service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 import { CidadeService } from './../cidade/cidade.service';
@@ -76,7 +77,9 @@ registerLocaleData(localePt);
   exports: [
     NavbarComponent,
     MenubarComponent,
-    ToastaModule
+    
+    ToastaModule,
+    BrowserAnimationsModule
   ],
   providers: [
     ParticipanteService,

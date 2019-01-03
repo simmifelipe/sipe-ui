@@ -1,16 +1,20 @@
+import { Modulo } from './../../shared/model/modulo.model';
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatSelectChange, MatTableDataSource } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastaService } from 'ngx-toasta';
-import { SelectItem } from 'primeng/components/common/selectitem';
+import { EmpresaModulo } from 'src/app/shared/model/empresa-modulo.model';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { UsuarioService } from '../usuario.service';
 import { EmpresaService } from './../../empresa/empresa.service';
+import { LiberacaoService } from './../../permissao/liberacao.service';
 import { AuthenticationService } from './../../seguranca/authentication.service';
-import { EmpresaUsuario } from './../../shared/model/empresa-usuario.model';
 import { Empresa } from './../../shared/model/empresa.model';
-import { Modulo } from './../../shared/model/modulo.model';
+import { Liberacao } from './../../shared/model/liberacao.model';
+import { LiberacaoPK } from './../../shared/model/liberacaoPK.model';
 import { Usuario } from './../../shared/model/usuario.model';
 import { UtilizadorService } from './../../utilizador/utilizador.service';
 
@@ -24,11 +28,19 @@ import { UtilizadorService } from './../../utilizador/utilizador.service';
 export class UsuarioCadastroComponent implements OnInit {
 
   colunas: any[];
-  niveis: SelectItem[];
   empresas: Empresa[] = [];
   usuario: Usuario = new Usuario();
-  empresasUsuario: EmpresaUsuario[] = [];
   empresasUsuarioSelecionadas: EmpresaUsuario[] = [];
+
+  niveis = [
+    { codigo: 1, label: 'Administrador' },
+    { codigo: 2, label: 'Avançado' },
+    { codigo: 3, label: 'Intermediário' },
+    { codigo: 4, label: 'Básico' }
+  ]
+  displayedColumns = ['select', 'col_empresa_nome', 'col_empresa_cnpj', 'col_modulo', 'col_niveis'];
+  dataSource = new MatTableDataSource<EmpresaUsuario>();
+  selection = new SelectionModel<EmpresaUsuario>(true, []);
 
 
   constructor(
@@ -40,25 +52,10 @@ export class UsuarioCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private empresaService: EmpresaService,
     private auth: AuthenticationService,
-    private utilizadorService: UtilizadorService) {
-
-    this.niveis = [
-      { label: 'Selecione...', value: null },
-      { label: 'Administrador', value: 2 },
-      { label: 'Avançado', value: 3 },
-      { label: 'Intermediário', value: 4 },
-      { label: 'Básico', value: 5 },
-    ];
-  }
+    private utilizadorService: UtilizadorService,
+    private liberacaoService: LiberacaoService) { }
 
   ngOnInit() {
-
-    this.colunas = [
-      { campo: 'empresa', header: 'Nome' },
-      { campo: 'empresa', header: 'CPF/CNPJ' },
-      { campo: 'modulo', header: 'Módulo' },
-      { campo: 'nivel', header: 'Nível de acesso' },
-    ];
 
     this.title.setTitle('Sipe - Usuario');
 
@@ -66,9 +63,18 @@ export class UsuarioCadastroComponent implements OnInit {
     if (codigoUsuario) {
       this.carregarUsuario(codigoUsuario);
     }
+    this.carregarDisponiveis();
+  }
 
-    this.carregarEmpresas();
-    this.carregarEmpresasUsuario();
+
+  carregarDisponiveis() {
+
+    if (this.auth.jwtPayload.codigo) {
+      this.liberacaoService.listarDisponiveis(this.auth.jwtPayload.codigo)
+        .subscribe(dados => {
+          this.dataSource.data = dados;
+        })
+    }
   }
 
   carregarUsuario(codigo: number) {
@@ -77,16 +83,37 @@ export class UsuarioCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  salvar(form: FormControl) {
+  salvar() {
     this.usuario.utilizador.codigo = this.auth.jwtPayload.utilizador;
 
-    this.usuarioService.adicionar(this.usuario)
-      .then(usuarioAdicionado => {
+    let liberacoes = [];
+    if (this.selection) {
 
-        this.toastaService.success('Usuário salvo com sucesso!');
-        this.router.navigate(['/usuarios', usuarioAdicionado.codigo]);
+      this.selection.selected.map(dados => {
+
+        let liberacaoPK = new LiberacaoPK();
+
+        liberacaoPK.usuario = new Usuario();
+        liberacaoPK.usuario.codigo = this.auth.jwtPayload.codigo;
+        let empresaModulo = new EmpresaModulo();
+        empresaModulo.empresa = dados.empresa;
+        empresaModulo.modulo = dados.modulo;
+        liberacaoPK.empresaModulo = empresaModulo;
+
+        let liberacao = new Liberacao();
+        liberacao.liberacaoPK = liberacaoPK;
+        liberacao.nivel = dados.nivel;
+
+        liberacoes.push(liberacao);
       })
-      .catch(erro => this.errorHandler.handle(erro));
+
+      this.usuario.liberacoes = liberacoes;
+      this.usuarioService.adicionar(this.usuario)
+        .subscribe((usuarioSalvo) => {
+          this.toastaService.success('Usuário salvo com sucesso!');
+          this.router.navigate(['/usuarios', usuarioSalvo.codigo]);
+        });
+    }
   }
 
   novo(form: FormControl) {
@@ -99,30 +126,33 @@ export class UsuarioCadastroComponent implements OnInit {
     this.router.navigate(['/usuarios/novo']);
   }
 
-  carregarEmpresas() {
-    this.empresaService.buscarPorUtilizador(this.auth.jwtPayload.utilizador)
-      .then(emprs => this.empresas = emprs)
-      .catch(erro => this.errorHandler.handle(erro));
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
   }
 
-  carregarEmpresasUsuario() {
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
+  }
 
-    this.empresasUsuario = [];
-    let modulos: Modulo[] = [];
-    this.utilizadorService.buscarPorCodigo(this.auth.jwtPayload.utilizador)
-      .then(utilizador => {
-        modulos = utilizador.modulos;
+  selecionar(event: MatSelectChange, element: EmpresaUsuario) {
+    element.nivel = event.value;
+  }
 
-        let codigo = 1;
-        this.empresas.forEach(emp => {
-          modulos.forEach(mod => {
-            const empUser = new EmpresaUsuario(codigo, emp, mod, null);
-            this.empresasUsuario.push(empUser);
-            codigo++;
-          });
-        });
-      })
-      .catch(erro => this.errorHandler.handle(erro));
+  show() {
+    console.log(this.selection.selected);
   }
 
 }
+
+export interface EmpresaUsuario {
+  codigo: number;
+  empresa: Empresa
+  modulo: Modulo;
+  nivel: number;
+}
+

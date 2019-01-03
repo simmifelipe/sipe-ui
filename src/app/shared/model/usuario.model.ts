@@ -1,3 +1,4 @@
+import { Liberacao } from './liberacao.model';
 import { Permissao } from './permissao.model';
 import { Utilizador } from './utilizador.model';
 
@@ -10,4 +11,5 @@ export class Usuario {
     ativo = true;
     permissoes: Permissao[] = [];
     utilizador: Utilizador = new Utilizador();
+    liberacoes: Liberacao[] = [];
 }

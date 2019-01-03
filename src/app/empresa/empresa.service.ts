@@ -24,9 +24,8 @@ export class EmpresaService {
       .toPromise();
   }
 
-  buscarPorUtilizador(codigo: number): Promise<Empresa[]> {
-    return this.http.get<Empresa[]>(`${this.empresasUrl}/utilizador/${codigo}`)
-      .toPromise();
+  buscarPorUtilizador(codigo: number) {
+    return this.http.get<Empresa[]>(`${this.empresasUrl}/utilizador/${codigo}`);
   }
 
 }
